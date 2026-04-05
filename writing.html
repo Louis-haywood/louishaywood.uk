@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quill Writing Animation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+html,body{
+    margin:0;
+    padding:0;
+    background:transparent;
+    overflow:hidden;
+}
+
+svg{
+    width:100vw;
+    height:100vh;
+}
+
+#text{
+    font-family: "Great Vibes", cursive;
+    font-size:120px;
+    fill:none;
+    stroke:#111;
+    stroke-width:2.4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+#quill{
+    transform-origin:center;
+}
+</style>
+</head>
+
+<body>
+
+<svg viewBox="0 0 1000 300">
+
+    <!-- Writing Text -->
+    <text id="text" x="80" y="170">Hello Louis</text>
+
+    <!-- Quill Pen -->
+    <g id="quill">
+        <!-- Feather -->
+        <path d="M0 -60 C30 -120 90 -120 60 -20 C50 10 20 10 0 0 Z"
+              fill="#f4f4f4" stroke="#444" stroke-width="2"/>
+
+        <!-- Shaft -->
+        <line x1="0" y1="0" x2="0" y2="40"
+              stroke="#444" stroke-width="3"/>
+
+        <!-- Nib -->
+        <polygon points="-6,40 6,40 0,55"
+                 fill="#333"/>
+    </g>
+
+</svg>
+
+<script>
+
+const text = document.getElementById("text");
+const quill = document.getElementById("quill");
+
+const length = text.getComputedTextLength();
+
+text.style.strokeDasharray = length;
+text.style.strokeDashoffset = length;
+
+const duration = 6500;
+const startX = 80;
+const baseY = 170;
+
+let startTime = null;
+
+function easeInOut(t){
+    return t<0.5
+        ? 4*t*t*t
+        : 1-Math.pow(-2*t+2,3)/2;
+}
+
+function animate(time){
+
+    if(!startTime) startTime = time;
+
+    const elapsed = time - startTime;
+    let progress = Math.min(elapsed/duration,1);
+
+    const eased = easeInOut(progress);
+
+    text.style.strokeDashoffset = length * (1-eased);
+
+    const x = startX + length * eased;
+
+    const y = baseY + Math.sin(eased*10)*3;
+
+    const angle = Math.sin(eased*12)*8;
+
+    quill.setAttribute(
+        "transform",
+        `translate(${x},${y}) rotate(${angle})`
+    );
+
+    if(progress < 1){
+        requestAnimationFrame(animate);
+    }
+}
+
+requestAnimationFrame(animate);
+
+</script>
+
+</body>
+</html>

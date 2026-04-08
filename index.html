@@ -312,7 +312,7 @@
     .hero-h1.glitching { animation:rgb-glitch 0.4s steps(1) both; }
 
     /* FLOWING GRADIENT ACCENT */
-    #scramble-2 { background:linear-gradient(90deg,#ff6532,#ffb400,#ff9000,#ff6532,#ffb400); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:accent-flow 5s linear infinite; padding-bottom:0.1em; }
+    #scramble-2 { background:linear-gradient(90deg,#ff6532,#ffb400,#ff9000,#ff6532,#ffb400); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:accent-flow 18s linear infinite; padding-bottom:0.1em; }
     #scramble-2 * { -webkit-text-fill-color:transparent; }
     @keyframes accent-flow { 0%{background-position:0% 0%} 100%{background-position:300% 0%} }
 
@@ -321,6 +321,12 @@
     .t-item.t-in .t-content::before { transform:scale(1); }
     .t-line-fill { position:absolute; left:-2px; top:0; width:2px; height:0; background:linear-gradient(to bottom,var(--amber),var(--amber-dim)); transition:height 0.7s cubic-bezier(0.22,1,0.36,1); border-radius:2px; z-index:1; }
     .t-item.t-in .t-line-fill { height:100%; }
+
+/* PORTFOLIO FILTERS */
+    .pf-filters { display:flex; gap:0.5rem; padding:2rem 2rem 0; flex-wrap:wrap; }
+    .pf-filter { font-family:var(--mono); font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.4rem 0.9rem; border-radius:6px; border:1px solid var(--border); color:var(--muted); background:transparent; cursor:pointer; transition:all 0.2s; }
+    .pf-filter:hover { border-color:rgba(255,101,50,0.3); color:var(--white); }
+    .pf-filter.active { background:var(--amber-glow); border-color:rgba(255,101,50,0.4); color:var(--amber); }
 
 /* HORIZONTAL PORTFOLIO TRACK */
     .pf-scroll-outer { position:relative; overflow:hidden; padding:2rem 0 0; }
@@ -485,25 +491,30 @@
       <div class="label">Work</div>
       <h1>Portfolio</h1>
     </div>
+    <div class="pf-filters">
+      <button class="pf-filter active" data-filter="all">All</button>
+      <button class="pf-filter" data-filter="sound">Sound</button>
+      <button class="pf-filter" data-filter="industry">Industry</button>
+    </div>
     <div class="pf-scroll-outer">
       <div class="pf-track" id="pf-track">
-        <div class="pf-card" data-title="SpongeBob The Musical" data-role="Sound Designer &amp; QLab Operator" data-venue="The Core Theatre, Solihull" data-date="February 2026" data-desc="Designed the full soundscape and operated QLab across all rehearsals and performances. Worked closely with the stage management team on all sound effects and liaised with the director throughout."><img src="https://louishaywood.uk/images/IMG_4902.jpg" alt="SpongeBob The Musical" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Sound Designer · QLab Operator</div><div class="pf-overlay-title">SpongeBob The Musical</div></div></div>
-        <div class="pf-card" data-title="SpongeBob The Musical" data-role="Sound Designer &amp; QLab Operator" data-venue="The Core Theatre, Solihull" data-date="February 2026" data-desc="Designed the full soundscape and operated QLab across all rehearsals and performances."><img src="https://louishaywood.uk/images/IMG_4869.jpg" alt="SpongeBob The Musical" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Sound Designer</div><div class="pf-overlay-title">SpongeBob The Musical</div></div></div>
-        <div class="pf-card" data-title="Live Band Performance" data-role="Sound Engineer" data-venue="BOA Creative, Digital & Performing Arts Academy" data-date="October 2025" data-desc="Sound engineer on this gig, routing the band and live mixing throughout performances."><img src="https://louishaywood.uk/images/IMG_3764.jpg" alt="Live Band Performance" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Sound Engineer</div><div class="pf-overlay-title">Live Band Performance</div></div></div>
-        <div class="pf-card" data-title="PRG Longbridge Visit" data-role="Industry Visit" data-venue="Longbridge" data-date="November 2025" data-desc="Tour around PRG Longbridge showing the general operations of their main facility."><img src="https://louishaywood.uk/images/IMG_3704.jpg" alt="PRG Longbridge Visit" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Industry Visit</div><div class="pf-overlay-title">PRG Longbridge</div></div></div>
-        <div class="pf-card" data-title="Production" data-role="Sound Engineer" data-venue="Venue" data-date="Date" data-desc="Description of work on this production."><img src="https://louishaywood.uk/images/IMG_3516.jpg" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Sound Engineer</div><div class="pf-overlay-title">Production</div></div></div>
-        <div class="pf-card" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description of work on this production."><img src="https://louishaywood.uk/images/08EF5BF3-D676-4297-B583-526DAFDCFF4E.JPG" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
-        <div class="pf-card" data-title="SpongeBob The Musical" data-role="Sound Designer &amp; QLab Operator" data-venue="The Core Theatre, Solihull" data-date="February 2026" data-desc="Designed the full soundscape and operated QLab across all rehearsals and performances."><img src="https://louishaywood.uk/images/IMG_4858.jpg" alt="SpongeBob The Musical" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Sound Designer</div><div class="pf-overlay-title">SpongeBob The Musical</div></div></div>
-        <div class="pf-card" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/IMG_1290.JPEG" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
-        <div class="pf-card" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/IMG_1294.JPEG" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
-        <div class="pf-card" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/f624718c-7394-49c5-a004-057e40c78cb7.png" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
-        <div class="pf-card" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/af321e4d-f156-4a79-8537-99e3699c985e.png" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
-        <div class="pf-card" data-title="SpongeBob The Musical" data-role="Sound Designer &amp; QLab Operator" data-venue="The Core Theatre, Solihull" data-date="February 2026" data-desc="Designed the full soundscape and operated QLab across all rehearsals and performances."><img src="https://louishaywood.uk/images/IMG_4850.jpg" alt="SpongeBob The Musical" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Sound Designer</div><div class="pf-overlay-title">SpongeBob The Musical</div></div></div>
-        <div class="pf-card" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/IMG_1244.JPEG" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
-        <div class="pf-card" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/IMG_9779.JPEG" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
-        <div class="pf-card" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/Screenshot%202025-05-07%20182940.png" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
-        <div class="pf-card" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/Screenshot%202025-05-07%20183125.png" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
-        <div class="pf-card" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/Screenshot%202025-05-07%20183118.png" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="SpongeBob The Musical" data-role="Sound Designer &amp; QLab Operator" data-venue="The Core Theatre, Solihull" data-date="February 2026" data-desc="Designed the full soundscape and operated QLab across all rehearsals and performances. Worked closely with the stage management team on all sound effects and liaised with the director throughout."><img src="https://louishaywood.uk/images/IMG_4902.jpg" alt="SpongeBob The Musical" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Sound Designer · QLab Operator</div><div class="pf-overlay-title">SpongeBob The Musical</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="SpongeBob The Musical" data-role="Sound Designer &amp; QLab Operator" data-venue="The Core Theatre, Solihull" data-date="February 2026" data-desc="Designed the full soundscape and operated QLab across all rehearsals and performances."><img src="https://louishaywood.uk/images/IMG_4869.jpg" alt="SpongeBob The Musical" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Sound Designer</div><div class="pf-overlay-title">SpongeBob The Musical</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="Live Band Performance" data-role="Sound Engineer" data-venue="BOA Creative, Digital & Performing Arts Academy" data-date="October 2025" data-desc="Sound engineer on this gig, routing the band and live mixing throughout performances."><img src="https://louishaywood.uk/images/IMG_3764.jpg" alt="Live Band Performance" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Sound Engineer</div><div class="pf-overlay-title">Live Band Performance</div></div></div>
+        <div class="pf-card" data-cat="industry" data-title="PRG Longbridge Visit" data-role="Industry Visit" data-venue="Longbridge" data-date="November 2025" data-desc="Tour around PRG Longbridge showing the general operations of their main facility."><img src="https://louishaywood.uk/images/IMG_3704.jpg" alt="PRG Longbridge Visit" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Industry Visit</div><div class="pf-overlay-title">PRG Longbridge</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="Production" data-role="Sound Engineer" data-venue="Venue" data-date="Date" data-desc="Description of work on this production."><img src="https://louishaywood.uk/images/IMG_3516.jpg" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Sound Engineer</div><div class="pf-overlay-title">Production</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description of work on this production."><img src="https://louishaywood.uk/images/08EF5BF3-D676-4297-B583-526DAFDCFF4E.JPG" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="SpongeBob The Musical" data-role="Sound Designer &amp; QLab Operator" data-venue="The Core Theatre, Solihull" data-date="February 2026" data-desc="Designed the full soundscape and operated QLab across all rehearsals and performances."><img src="https://louishaywood.uk/images/IMG_4858.jpg" alt="SpongeBob The Musical" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Sound Designer</div><div class="pf-overlay-title">SpongeBob The Musical</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/IMG_1290.JPEG" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/IMG_1294.JPEG" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/f624718c-7394-49c5-a004-057e40c78cb7.png" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/af321e4d-f156-4a79-8537-99e3699c985e.png" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="SpongeBob The Musical" data-role="Sound Designer &amp; QLab Operator" data-venue="The Core Theatre, Solihull" data-date="February 2026" data-desc="Designed the full soundscape and operated QLab across all rehearsals and performances."><img src="https://louishaywood.uk/images/IMG_4850.jpg" alt="SpongeBob The Musical" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Sound Designer</div><div class="pf-overlay-title">SpongeBob The Musical</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/IMG_1244.JPEG" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/IMG_9779.JPEG" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/Screenshot%202025-05-07%20182940.png" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/Screenshot%202025-05-07%20183125.png" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
+        <div class="pf-card" data-cat="sound" data-title="Production" data-role="Role" data-venue="Venue" data-date="Date" data-desc="Description."><img src="https://louishaywood.uk/images/Screenshot%202025-05-07%20183118.png" alt="Production" loading="lazy"><div class="pf-overlay"><div class="pf-overlay-role">Role</div><div class="pf-overlay-title">Production</div></div></div>
       </div>
       <div class="pf-progress"><div id="pf-bar"></div></div>
     </div>
@@ -535,7 +546,6 @@
       <div class="label">Résumé</div>
       <h1>CV</h1>
       <p style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);margin-top:0.75rem;letter-spacing:0.07em"><span id="cv-email-display"></span></p>
-      <a class="btn btn-outline" href="https://1drv.ms/w/c/7c79d9d73d90e02d/IQBz-bV9AFkVQ7kbNqih1itEAaVvRIlf8SGStMl7MrpSmOI?e=hyFId4" target="_blank" rel="noopener" style="margin-top:1.25rem;display:inline-flex">Download CV ↗</a>
     </div>
     <div class="section" style="padding-top:2.5rem">
       <div style="margin-bottom:3rem"><div class="card reveal"><h3>Personal Profile</h3><p>Enthusiastic and technically adept theatre technician with practical experience in sound design, live audio mixing, and stage production. Skilled in supporting live performances through precision, teamwork, and problem solving under pressure. Adept at operating industry-standard equipment and working collaboratively with production teams to deliver high-quality theatrical experiences.</p></div></div>
@@ -850,6 +860,20 @@
         }
         const s2=document.getElementById('scramble-2');
         if(s2) scramble(s2,'Haywood',420);
+      })();
+
+      /* ── Portfolio Filters ── */
+      (function(){
+        document.querySelectorAll('.pf-filter').forEach(btn=>{
+          btn.addEventListener('click',()=>{
+            document.querySelectorAll('.pf-filter').forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            const f=btn.dataset.filter;
+            document.querySelectorAll('.pf-card').forEach(c=>{
+              c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';
+            });
+          });
+        });
       })();
 
       /* ── 3D Card Tilt ── */

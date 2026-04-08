@@ -307,17 +307,6 @@
     }
     .hero-h1.glitching { animation:rgb-glitch 0.4s steps(1) both; }
 
-    /* LOADER */
-    #loader { position:fixed; inset:0; background:var(--black); z-index:99999; display:flex; align-items:center; justify-content:center; }
-    #loader-inner { position:relative; width:140px; height:140px; }
-    #loader-inner svg { position:absolute; inset:0; width:100%; height:100%; }
-    #loader-ring { animation:ring-in 1.1s cubic-bezier(0.4,0,0.2,1) forwards 0.2s; }
-    @keyframes ring-in { to { stroke-dashoffset:0; } }
-    #loader-lh { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--sans); font-size:2rem; font-weight:900; letter-spacing:-0.06em; color:transparent; -webkit-text-stroke:1.5px var(--amber); animation:lh-fill 0.4s ease forwards 1s; }
-    @keyframes lh-fill { to { color:var(--amber); -webkit-text-stroke-color:transparent; } }
-    #loader.out { animation:loader-exit 0.55s cubic-bezier(0.22,1,0.36,1) forwards; pointer-events:none; }
-    @keyframes loader-exit { to { opacity:0; transform:scale(1.04); } }
-
     /* FLOWING GRADIENT ACCENT */
     #scramble-2 { background:linear-gradient(90deg,#ff6532,#ffb400,#ff9000,#ff6532,#ffb400); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:accent-flow 5s linear infinite; }
     #scramble-2 * { -webkit-text-fill-color:transparent; }

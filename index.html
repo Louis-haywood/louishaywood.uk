@@ -696,18 +696,16 @@
           const target=parseInt(text);
           const suffix=text.replace(/[0-9]/g,'');
           el.textContent='0'+suffix;
-          setTimeout(()=>{
-            let start=null;
-            const dur=1400;
-            (function step(ts){
-              if(!start)start=ts;
-              const p=Math.min((ts-start)/dur,1);
-              const eased=1-Math.pow(1-p,3);
-              el.textContent=Math.floor(eased*target)+suffix;
-              if(p<1)requestAnimationFrame(step);
-              else el.textContent=target+suffix;
-            })(performance.now());
-          }, 2200+i*160);
+          let start=null;
+          const dur=1400;
+          (function step(ts){
+            if(!start)start=ts;
+            const p=Math.min((ts-start)/dur,1);
+            const eased=1-Math.pow(1-p,3);
+            el.textContent=Math.floor(eased*target)+suffix;
+            if(p<1)requestAnimationFrame(step);
+            else el.textContent=target+suffix;
+          })(performance.now());
         });
       })();
 

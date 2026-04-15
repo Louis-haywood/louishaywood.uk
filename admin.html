@@ -418,7 +418,7 @@ let PASSWORD = '';
 // ── Login ──────────────────────────────────────────────────────────────────────
 function doLogin() {
   const pw = document.getElementById('pw-input').value;
-  fetch('/api/content', { headers: { 'x-admin-password': pw } })
+  fetch('/cms-api.php?action=content', { headers: { 'x-admin-password': pw } })
     .then(r => {
       if (r.status === 401) throw new Error('bad');
       return r.json();
@@ -560,7 +560,7 @@ function get(id) {
 function saveAll() {
   collectAll();
   setStatus('saving', 'Saving…');
-  fetch('/api/content', {
+  fetch('/cms-api.php?action=content', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
     body: JSON.stringify(CONTENT)
@@ -592,7 +592,7 @@ function uploadImg(input, targetId, previewId) {
   if (!input.files[0]) return;
   const fd = new FormData();
   fd.append('image', input.files[0]);
-  fetch('/api/upload', { method:'POST', headers:{'x-admin-password':PASSWORD}, body:fd })
+  fetch('/cms-api.php?action=upload', { method:'POST', headers:{'x-admin-password':PASSWORD}, body:fd })
     .then(r => r.json())
     .then(d => {
       if (d.url) {
@@ -803,7 +803,7 @@ function uploadImgToField(input) {
   const card = input.closest('.item-card-body');
   const fd = new FormData();
   fd.append('image', input.files[0]);
-  fetch('/api/upload', { method:'POST', headers:{'x-admin-password':PASSWORD}, body:fd })
+  fetch('/cms-api.php?action=upload', { method:'POST', headers:{'x-admin-password':PASSWORD}, body:fd })
     .then(r => r.json())
     .then(d => {
       if (d.url) {

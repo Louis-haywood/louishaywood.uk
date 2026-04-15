@@ -1,11 +1,12 @@
 /**
  * Portfolio CMS Server
  * Run: node server.js
- * Then open: http://localhost:3000/admin.html
+ * Then open: http://yourdomain.com/admin.html
  *
- * Set your admin password via environment variable:
- *   ADMIN_PASSWORD=mypassword node server.js
+ * Password is set in .env (ADMIN_PASSWORD=...)
  */
+
+require('dotenv').config();
 
 const express = require('express');
 const fs      = require('fs');
@@ -14,7 +15,7 @@ const multer  = require('multer');
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin'; // set in .env
 
 const ROOT = __dirname;
 
@@ -81,7 +82,7 @@ app.post('/api/upload', requireAuth, upload.single('image'), (req, res) => {
 
 // ── Start ─────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`\n  Portfolio CMS running at  http://localhost:${PORT}`);
-  console.log(`  Admin panel              http://localhost:${PORT}/admin.html`);
+  console.log(`\n  Portfolio CMS running at  https://louishaywood.uk:${PORT}`);
+  console.log(`  Admin panel              https://louishaywood.uk:${PORT}/admin.html`);
   console.log(`  Password                 ${ADMIN_PASSWORD === 'admin' ? 'admin  ← change this!' : '(set via ADMIN_PASSWORD)'}\n`);
 });

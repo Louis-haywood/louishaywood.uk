@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(node -e \"const m=require\\('multer'\\); console.log\\('multer ok, version:', require\\('./node_modules/multer/package.json'\\).version\\)\")",
+      "Bash(node -e \"require\\('./server.js'\\)\")",
+      "Bash(curl -s http://localhost:3000/api/content)",
+      "Bash(node -e \"const d=require\\('fs'\\).readFileSync\\(0,'utf8'\\); const j=JSON.parse\\(d\\); console.log\\('hero.firstName:', j.hero.firstName\\); console.log\\('portfolio count:', j.portfolio.length\\); console.log\\('noda reviews:', j.noda.reviews.length\\);\")"
+    ]
+  }
+}

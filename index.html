@@ -367,14 +367,14 @@
   <div id="home" class="page active">
     <div class="hero">
       <div class="hero-left">
-        <div class="hero-badge"><div class="hero-badge-dot"></div>Technical Theatre · Birmingham</div>
+        <div class="hero-badge" id="cms-hero-badge"><div class="hero-badge-dot"></div>Technical Theatre · Birmingham</div>
         <h1 class="hero-h1"><span id="scramble-1">Louis</span><span class="accent" id="scramble-2">Haywood</span></h1>
-        <p class="hero-desc">Sound designer and live audio engineer — Birmingham Ormiston Academy Stage &amp; Screen. Mixing live shows, designing soundscapes, getting it right every night.</p>
+        <p class="hero-desc" id="cms-hero-desc">Sound designer and live audio engineer — Birmingham Ormiston Academy Stage &amp; Screen. Mixing live shows, designing soundscapes, getting it right every night.</p>
         <div class="hero-actions">
           <a class="btn btn-primary nav-link" data-page="portfolio" href="#portfolio">View Portfolio</a>
           <a class="btn btn-outline nav-link" data-page="cv" href="#cv">See CV</a>
         </div>
-        <div class="hero-stats">
+        <div class="hero-stats" id="cms-hero-stats">
           <div><div class="stat-num">7</div><div class="stat-label">Years of experience</div></div>
           <div><div class="stat-num">12+</div><div class="stat-label">Productions</div></div>
           <div><div class="stat-num">5</div><div class="stat-label">NODA reviews</div></div>
@@ -382,10 +382,10 @@
         <canvas id="waveform" aria-hidden="true"></canvas>
       </div>
       <div class="hero-right">
-        <div class="hero-img-main"></div>
-        <div class="hero-caption">SpongeBob The Musical · Feb 2026</div>
+        <div class="hero-img-main" id="cms-hero-img"></div>
+        <div class="hero-caption" id="cms-hero-caption">SpongeBob The Musical · Feb 2026</div>
         <div class="hero-img-overlay">
-          <img src="https://louishaywood.uk/pfp.jpg" alt="Louis Haywood">
+          <img id="cms-overlay-img" src="https://louishaywood.uk/pfp.jpg" alt="Louis Haywood">
         </div>
       </div>
     </div>
@@ -400,15 +400,15 @@
     <div class="project-banner reveal">
       <span class="pb-label">Latest Project</span>
       <div class="pb-inner">
-        <div class="pb-title">SpongeBob The Musical — Sound Designer &amp; QLab Operator</div>
-        <div class="pb-desc">Full soundscape design and QLab operation across all rehearsals &amp; shows · The Core Theatre, Solihull · Feb 2026</div>
+        <div class="pb-title" id="cms-banner-title">SpongeBob The Musical — Sound Designer &amp; QLab Operator</div>
+        <div class="pb-desc" id="cms-banner-desc">Full soundscape design and QLab operation across all rehearsals &amp; shows · The Core Theatre, Solihull · Feb 2026</div>
       </div>
       <a class="btn btn-ghost nav-link" data-page="portfolio" href="#portfolio" style="white-space:nowrap">See Work</a>
     </div>
 
     <div class="section">
       <div class="label">Specialisms</div>
-      <div class="spec-grid">
+      <div class="spec-grid" id="cms-spec-grid">
         <div class="spec-item">
           <div class="spec-num">01</div>
           <h3>Sound &amp; Audio</h3>
@@ -445,7 +445,7 @@
     </div>
     <div class="section">
       <div class="about-split">
-        <div class="about-text">
+        <div class="about-text" id="cms-about-text">
           <p class="reveal" style="font-size:1.1rem;font-weight:600;color:var(--white);line-height:1.65;margin-bottom:1.75rem">Technical Theatre student specialising in sound design — moving from stage to desk, and loving every second of it.</p>
           <p class="reveal" style="transition-delay:.05s">I'm Louis, a BOA Stage &amp; Screen Technical Theatre student in Year 12. My theatre journey began on stage, performing in productions such as Popstars' 90s Musical (2019), Oklahoma! (2020), Battle of Boat (2022), Bugsy Malone (2023), and The Wizard of Oz (2024). Over time I discovered my passion lay behind the scenes — especially in sound.</p>
           <p class="reveal" style="transition-delay:.1s">In 2025 I moved fully into sound with SOSage and Cookie Theatre Company, leading audio for live performances: programming and running sound effects, balancing levels, supporting rehearsals, and troubleshooting in real time.</p>
@@ -454,14 +454,14 @@
         </div>
         <div class="reveal" style="transition-delay:.1s">
           <div style="border-radius:14px;overflow:hidden;height:100%;min-height:420px;background:var(--surface2);">
-            <img src="https://louishaywood.uk/images/me.jpg" alt="Louis Haywood" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+            <img id="cms-about-img" src="https://louishaywood.uk/images/me.jpg" alt="Louis Haywood" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
           </div>
         </div>
       </div>
 
       <hr class="div">
       <div class="label">Transferable Skills</div>
-      <div class="grid-2">
+      <div class="grid-2" id="cms-skills-grid">
         <div class="card reveal"><h3>Communication</h3><p>Comfortable explaining ideas, giving direction, and working with different teams on and off stage.</p></div>
         <div class="card reveal" style="transition-delay:.06s"><h3>Strong Teamwork</h3><p>Used to collaborating with actors, directors, and tech crews to keep everything running smoothly.</p></div>
         <div class="card reveal" style="transition-delay:.12s"><h3>Problem Solving</h3><p>Able to think fast and sort issues during live shows or tight turnarounds.</p></div>
@@ -472,11 +472,11 @@
 
       <hr class="div">
       <div class="label">Technical Expertise</div>
-      <div class="tags">
+      <div class="tags" id="cms-about-tags">
         <span class="tag">Behringer X32</span><span class="tag">Allen &amp; Heath SQ7</span><span class="tag">QLab 5</span><span class="tag">EOS ETC Lighting</span><span class="tag">Live Sound Mixing</span><span class="tag">Sound Design</span><span class="tag">Follow Spot Operation</span><span class="tag">EQ &amp; Gain Management</span><span class="tag">Troubleshooting</span><span class="tag">Stage Rigging</span><span class="tag">Show Running</span><span class="tag">Dante Networking</span>
       </div>
 
-      <div class="photo-strip reveal" style="margin-top:3rem;transition-delay:.1s">
+      <div class="photo-strip reveal" id="cms-photo-strip" style="margin-top:3rem;transition-delay:.1s">
         <div class="photo-strip-item"><img src="https://louishaywood.uk/images/IMG_4902.jpg" alt="SpongeBob The Musical stage production at The Core Theatre, Solihull" loading="lazy"></div>
         <div class="photo-strip-item"><img src="https://louishaywood.uk/images/IMG_3704.jpg" alt="PRG Longbridge industry visit" loading="lazy"></div>
         <div class="photo-strip-item"><img src="https://louishaywood.uk/images/IMG_1290.JPEG" alt="Stage production" loading="lazy"></div>
@@ -528,8 +528,8 @@
       <h1>Performance <em>Experience</em></h1>
     </div>
     <div class="section">
-      <p class="reveal" style="color:var(--muted);max-width:520px;margin-bottom:3rem;font-size:0.95rem;line-height:1.8">My theatre journey began on stage — these roles gave me the empathy to work alongside performers as a sound operator and technician.</p>
-      <div class="grid-2">
+      <p class="reveal" id="cms-perf-intro" style="color:var(--muted);max-width:520px;margin-bottom:3rem;font-size:0.95rem;line-height:1.8">My theatre journey began on stage — these roles gave me the empathy to work alongside performers as a sound operator and technician.</p>
+      <div class="grid-2" id="cms-perf-grid">
         <div class="perf-card reveal"><div class="role">Uncle Henry &amp; The Guard</div><h3>"The Wizard of Oz"</h3><div class="meta">March 2024 · Artrix Theatre, Bromsgrove</div></div>
         <div class="perf-card reveal" style="transition-delay:.07s"><div class="role">Fat Sam (Semi-lead)</div><h3>"Bugsy Malone"</h3><div class="meta">March 2023 · The Core Theatre, Solihull</div></div>
         <div class="perf-card reveal" style="transition-delay:.14s"><div class="role">Jimmy</div><h3>"Battle of Boat"</h3><div class="meta">March 2022 · Core Theatre, Solihull</div></div>
@@ -548,10 +548,10 @@
       <p style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);margin-top:0.75rem;letter-spacing:0.07em"><span id="cv-email-display"></span></p>
     </div>
     <div class="section" style="padding-top:2.5rem">
-      <div style="margin-bottom:3rem"><div class="card reveal"><h3>Personal Profile</h3><p>Enthusiastic and technically adept theatre technician with practical experience in sound design, live audio mixing, and stage production. Skilled in supporting live performances through precision, teamwork, and problem solving under pressure. Adept at operating industry-standard equipment and working collaboratively with production teams to deliver high-quality theatrical experiences.</p></div></div>
+      <div style="margin-bottom:3rem"><div class="card reveal"><h3>Personal Profile</h3><p id="cms-cv-profile">Enthusiastic and technically adept theatre technician with practical experience in sound design, live audio mixing, and stage production. Skilled in supporting live performances through precision, teamwork, and problem solving under pressure. Adept at operating industry-standard equipment and working collaboratively with production teams to deliver high-quality theatrical experiences.</p></div></div>
       <div style="margin-bottom:3rem">
         <div class="label">Technical Experience</div>
-        <div class="timeline">
+        <div class="timeline" id="cms-cv-exp">
           <div class="t-item reveal"><div class="t-date">Feb – Apr 2026</div><div class="t-content"><h3>Sound Designer — <span style="color:var(--muted);font-weight:400">Shakespeare in Love, The BOA Group</span></h3><ul><li>Designed the soundscape for the production.</li><li>Created a time and location established soundscape.</li><li>Liaised with the director to perfect the design.</li></ul></div></div>
           <div class="t-item reveal"><div class="t-date">Feb 2026</div><div class="t-content"><h3>Sound Designer &amp; QLab Operator — <span style="color:var(--muted);font-weight:400">SpongeBob, The Core Theatre Solihull</span></h3><ul><li>Took notes during rehearsals to brief the technical team effectively.</li><li>Managed QLab for all rehearsals and shows, covering all sound effects.</li><li>Led as sound designer, taking responsibility for the overall soundscape.</li><li>Worked closely with the stage management team.</li></ul></div></div>
           <div class="t-item reveal"><div class="t-date">Jan – Feb 2026</div><div class="t-content"><h3>Sound Technician — <span style="color:var(--muted);font-weight:400">FAME, John Henry Newman Catholic College</span></h3><ul><li>Live mixing across all rehearsals and performances.</li><li>Mic'd performers and carried out sound and quality checks.</li><li>Managed QLab for sound cues throughout the run.</li></ul></div></div>
@@ -562,13 +562,13 @@
       </div>
       <div style="margin-bottom:3rem">
         <div class="label">Education</div>
-        <div class="timeline">
+        <div class="timeline" id="cms-cv-edu">
           <div class="t-item reveal"><div class="t-date">Sep 2025 – Present</div><div class="t-content"><h3>Birmingham Ormiston Academy — Stage &amp; Screen</h3><p>Level 3 in Technical Theatre and Live Events.</p></div></div>
           <div class="t-item reveal"><div class="t-date">Sep 2020 – Jun 2025</div><div class="t-content"><h3>Alderbrook School</h3><p>GCSE Grade 4 — Drama (sound design) · GCSE Grade 4 — Photography · Level 2 Distinction — iMedia</p></div></div>
         </div>
       </div>
-      <div style="margin-bottom:2rem"><div class="label">Theatre Technical Skills</div><div class="tags" style="margin-top:0"><span class="tag">Behringer X32</span><span class="tag">Allen &amp; Heath SQ7</span><span class="tag">QLab 5</span><span class="tag">EOS ETC Lighting</span><span class="tag">Live Sound Mixing</span><span class="tag">Sound Design</span><span class="tag">Microphone Management</span><span class="tag">Follow Spot Operation</span><span class="tag">Stage Management Comms</span><span class="tag">Dante Networking</span></div></div>
-      <div style="margin-bottom:2rem"><div class="label">IT Systems</div><div class="tags" style="margin-top:0"><span class="tag">Word</span><span class="tag">Excel</span><span class="tag">PowerPoint</span><span class="tag">Google Workspace</span><span class="tag">Blender</span><span class="tag">Visual Studio Code</span><span class="tag">Windows</span><span class="tag">macOS</span></div></div>
+      <div style="margin-bottom:2rem"><div class="label">Theatre Technical Skills</div><div class="tags" id="cms-theatre-tags" style="margin-top:0"><span class="tag">Behringer X32</span><span class="tag">Allen &amp; Heath SQ7</span><span class="tag">QLab 5</span><span class="tag">EOS ETC Lighting</span><span class="tag">Live Sound Mixing</span><span class="tag">Sound Design</span><span class="tag">Microphone Management</span><span class="tag">Follow Spot Operation</span><span class="tag">Stage Management Comms</span><span class="tag">Dante Networking</span></div></div>
+      <div style="margin-bottom:2rem"><div class="label">IT Systems</div><div class="tags" id="cms-it-tags" style="margin-top:0"><span class="tag">Word</span><span class="tag">Excel</span><span class="tag">PowerPoint</span><span class="tag">Google Workspace</span><span class="tag">Blender</span><span class="tag">Visual Studio Code</span><span class="tag">Windows</span><span class="tag">macOS</span></div></div>
       <div><div class="card reveal" style="max-width:320px"><h3>References</h3><p>Available upon request.</p></div></div>
     </div>
     <footer><span>© 2026 Louis Haywood</span><span><span class="footer-dot">◆</span> Technical Theatre</span></footer>
@@ -581,8 +581,8 @@
       <h1>NODA <em>Reports</em></h1>
     </div>
     <div class="section" style="padding-top:2rem">
-      <p class="reveal" style="color:var(--muted);font-size:0.95rem;line-height:1.8;max-width:600px;margin-bottom:2.5rem">Independent show reviews from the National Operatic and Dramatic Association — the UK's largest amateur theatre organisation.</p>
-      <div class="noda-grid">
+      <p class="reveal" id="cms-noda-intro" style="color:var(--muted);font-size:0.95rem;line-height:1.8;max-width:600px;margin-bottom:2.5rem">Independent show reviews from the National Operatic and Dramatic Association — the UK's largest amateur theatre organisation.</p>
+      <div class="noda-grid" id="cms-noda-grid">
         <div class="noda-card reveal"><div class="noda-meta"><span class="noda-role">Uncle Henry</span><span class="noda-date">2 Mar 2024</span></div><div class="noda-badge">★ Named in review</div><h3>The Wizard of Oz</h3><div class="noda-venue">Sosage Factory · The Artrix, Bromsgrove</div><div class="noda-quote">"Great support also came from Halle Kwarteng and <strong>Louis Haywood</strong> as Aunt Em and Uncle Henry."<br><br>"The entire company worked well together with some lovely singing and acting."</div><a href="https://www.noda.org.uk/show-reports/the-wizard-of-oz-1711293977" target="_blank" rel="noopener noreferrer" class="noda-link">Read Full Report →</a></div>
         <div class="noda-card reveal" style="transition-delay:.07s"><div class="noda-meta"><span class="noda-role">Fat Sam</span><span class="noda-date">4 Mar 2023</span></div><div class="noda-badge">★ Named in review</div><h3>Bugsy Malone</h3><div class="noda-venue">Sosage Factory · The Core Theatre, Solihull</div><div class="noda-quote">"The battle between <strong>Fat Sam (Louis Haywood)</strong> and Dandy Dan's gang was excellent."<br><br>"Our future is secure with this society full of talented members."</div><a href="https://www.noda.org.uk/show-reports/bugsy-malone-1678731617" target="_blank" rel="noopener noreferrer" class="noda-link">Read Full Report →</a></div>
         <div class="noda-card reveal" style="transition-delay:.14s"><div class="noda-meta"><span class="noda-role">Sound Technician</span><span class="noda-date">22 Feb 2025</span></div><h3>Zombie Prom</h3><div class="noda-venue">Sosage Factory · Alderbrook School, Solihull</div><div class="noda-quote">"The singing both principals and chorus could be heard."<br><br>"Congratulations to the cast and crew… the very talented members of SOSage Factory did it proud."</div><a href="https://www.noda.org.uk/show-reports/zombie-prom-1741031018" target="_blank" rel="noopener noreferrer" class="noda-link">Read Full Report →</a></div>
@@ -608,13 +608,13 @@
           <div class="contact-label">Email</div>
           <a id="contact-email-link" class="contact-email" href="#"></a>
           <div class="contact-label">Based in</div>
-          <div class="contact-value">West Midlands, UK<br>Available for regional &amp; touring work.</div>
+          <div class="contact-value" id="cms-contact-location">West Midlands, UK<br>Available for regional &amp; touring work.</div>
           <div class="contact-label">Open to</div>
-          <div class="contact-value">Theatre productions · Live events<br>Assistant technical roles · Work placements</div>
+          <div class="contact-value" id="cms-contact-openTo">Theatre productions · Live events<br>Assistant technical roles · Work placements</div>
           <div class="socials">
-            <a href="https://www.instagram.com/louis.haywood" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="iconify" data-icon="mdi:instagram" style="font-size:18px"></span></a>
-            <a href="https://www.linkedin.com/in/louis-haywood-ab9026373/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><span class="iconify" data-icon="mdi:linkedin" style="font-size:18px"></span></a>
-            <a href="https://github.com/Louis-haywood" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><span class="iconify" data-icon="mdi:github" style="font-size:18px"></span></a>
+            <a id="cms-social-instagram" href="https://www.instagram.com/louis.haywood" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="iconify" data-icon="mdi:instagram" style="font-size:18px"></span></a>
+            <a id="cms-social-linkedin" href="https://www.linkedin.com/in/louis-haywood-ab9026373/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><span class="iconify" data-icon="mdi:linkedin" style="font-size:18px"></span></a>
+            <a id="cms-social-github" href="https://github.com/Louis-haywood" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><span class="iconify" data-icon="mdi:github" style="font-size:18px"></span></a>
           </div>
         </div>
         <div class="insta-panel reveal" style="transition-delay:.1s">
@@ -780,11 +780,11 @@
         if(turb&&disp){
           let dp=0,dt=0,activeImg=null;
           (function animD(){ dp+=(dt-dp)*0.07; const f=dp*0.016; turb.setAttribute('baseFrequency',f+' '+(f*0.85)); disp.setAttribute('scale',dp*30); requestAnimationFrame(animD); })();
-          document.querySelectorAll('.pf-card').forEach(card=>{
-            const img=card.querySelector('img');
-            card.addEventListener('mouseenter',()=>{ if(activeImg&&activeImg!==img)activeImg.style.filter=''; activeImg=img; img.style.filter='url(#card-distort)'; dt=1; });
-            card.addEventListener('mouseleave',()=>{ dt=0; const cap=img; setTimeout(()=>{ if(dt===0&&activeImg===cap){cap.style.filter='';activeImg=null;} },700); });
-          });
+          const pfTrackD = document.getElementById('pf-track');
+          if (pfTrackD) {
+            pfTrackD.addEventListener('mouseenter', e => { const card=e.target.closest('.pf-card'); if(!card)return; const img=card.querySelector('img'); if(activeImg&&activeImg!==img)activeImg.style.filter=''; activeImg=img; img.style.filter='url(#card-distort)'; dt=1; }, true);
+            pfTrackD.addEventListener('mouseleave', e => { const card=e.target.closest('.pf-card'); if(!card)return; dt=0; const cap=card.querySelector('img'); setTimeout(()=>{ if(dt===0&&activeImg===cap){cap.style.filter='';activeImg=null;} },700); }, true);
+          }
         }
       }
 
@@ -814,7 +814,8 @@
           mc.style.transform='scale(0.95)'; mc.style.opacity='0';
           setTimeout(()=>{ pfModal.classList.remove('open'); mc.style.transition='none'; mc.style.transform=''; mc.style.opacity=''; document.body.style.overflow=''; setTimeout(()=>pfImg.src='',50); },300);
         }
-        document.querySelectorAll('.pf-card').forEach(c=>c.addEventListener('click',()=>openModal(c)));
+        const pfTrackEl = document.getElementById('pf-track');
+        if (pfTrackEl) pfTrackEl.addEventListener('click', e => { const card = e.target.closest('.pf-card'); if (card) openModal(card); });
         pfClose.addEventListener('click',closeModal);
         pfBackdrop.addEventListener('click',closeModal);
         document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeModal(); });
@@ -874,13 +875,15 @@
         });
       })();
 
-      /* ── 3D Card Tilt ── */
+      /* ── 3D Card Tilt (event delegation) ── */
       if(window.matchMedia('(pointer: fine)').matches){
-        document.querySelectorAll('.pf-card').forEach(card=>{
-          const shine=document.createElement('div');
-          shine.className='pf-shine';
-          card.appendChild(shine);
-          card.addEventListener('mousemove',e=>{
+        const pfTrackT=document.getElementById('pf-track');
+        if(pfTrackT){
+          pfTrackT.addEventListener('mousemove',e=>{
+            const card=e.target.closest('.pf-card');
+            if(!card)return;
+            let shine=card.querySelector('.pf-shine');
+            if(!shine){ shine=document.createElement('div'); shine.className='pf-shine'; card.appendChild(shine); }
             const r=card.getBoundingClientRect();
             const x=e.clientX-r.left, y=e.clientY-r.top;
             const rx=((y-r.height/2)/(r.height/2))*-7;
@@ -890,14 +893,235 @@
             shine.style.opacity='1';
             shine.style.background='radial-gradient(circle at '+(x/r.width*100)+'% '+(y/r.height*100)+'%, rgba(255,255,255,0.11) 0%, transparent 65%)';
           });
-          card.addEventListener('mouseleave',()=>{
+          pfTrackT.addEventListener('mouseleave',e=>{
+            const card=e.target.closest('.pf-card');
+            if(!card)return;
+            const shine=card.querySelector('.pf-shine');
             card.style.transition='transform 0.6s cubic-bezier(0.22,1,0.36,1)';
             card.style.transform='';
-            shine.style.opacity='0';
-          });
-        });
+            if(shine)shine.style.opacity='0';
+          },true);
+        }
       }
     });
+  </script>
+
+  <!-- CMS Content Loader — fetches content.json and updates the page -->
+  <script>
+  (function() {
+    function esc(s) {
+      return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function el(id) { return document.getElementById(id); }
+    function setText(id, val) { const e = el(id); if (e) e.textContent = val || ''; }
+    function setHtml(id, val) { const e = el(id); if (e) e.innerHTML = val || ''; }
+    function setAttr(id, attr, val) { const e = el(id); if (e && val) e.setAttribute(attr, val); }
+
+    fetch('content.json')
+      .then(r => r.json())
+      .then(c => {
+        applyContent(c);
+      })
+      .catch(() => { /* silently fall back to hardcoded HTML */ });
+
+    function applyContent(c) {
+      // ── Hero ──
+      const badge = el('cms-hero-badge');
+      if (badge) badge.innerHTML = '<div class="hero-badge-dot"></div>' + esc(c.hero.badge);
+      setText('scramble-1', c.hero.firstName);
+      setText('scramble-2', c.hero.lastName);
+      setText('cms-hero-desc', c.hero.description);
+      setText('cms-hero-caption', c.hero.heroCaption);
+
+      const heroImg = el('cms-hero-img');
+      if (heroImg && c.hero.heroImage) heroImg.style.backgroundImage = `url('${c.hero.heroImage}')`;
+
+      const overlayImg = el('cms-overlay-img');
+      if (overlayImg && c.hero.overlayImage) overlayImg.src = c.hero.overlayImage;
+
+      // Stats
+      const statsEl = el('cms-hero-stats');
+      if (statsEl && c.hero.stats) {
+        statsEl.innerHTML = c.hero.stats.map(s =>
+          `<div><div class="stat-num">${esc(s.num)}</div><div class="stat-label">${esc(s.label)}</div></div>`
+        ).join('');
+      }
+
+      // Banner
+      setText('cms-banner-title', c.banner.title);
+      setText('cms-banner-desc', c.banner.desc);
+
+      // Specialisms
+      const specGrid = el('cms-spec-grid');
+      if (specGrid && c.specialisms) {
+        specGrid.innerHTML = c.specialisms.map(s =>
+          `<div class="spec-item">
+            <div class="spec-num">${esc(s.num)}</div>
+            <h3>${esc(s.title)}</h3>
+            <p>${esc(s.desc)}</p>
+          </div>`
+        ).join('');
+      }
+
+      // ── Portfolio ──
+      const pfTrack = el('pf-track');
+      if (pfTrack && c.portfolio) {
+        pfTrack.innerHTML = c.portfolio.map(p =>
+          `<div class="pf-card" data-cat="${esc(p.cat)}" data-title="${esc(p.title)}" data-role="${esc(p.role)}" data-venue="${esc(p.venue)}" data-date="${esc(p.date)}" data-desc="${esc(p.desc)}">
+            <img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy">
+            <div class="pf-overlay">
+              <div class="pf-overlay-role">${esc(p.overlayRole || p.role)}</div>
+              <div class="pf-overlay-title">${esc(p.title)}</div>
+            </div>
+          </div>`
+        ).join('');
+        // re-attach portfolio card click handlers
+        if (typeof window.__attachPfCards === 'function') window.__attachPfCards();
+      }
+
+      // ── About ──
+      const aboutText = el('cms-about-text');
+      if (aboutText && c.about) {
+        const delays = [0, 0.05, 0.1, 0.15, 0.2];
+        let html = `<p class="reveal" style="font-size:1.1rem;font-weight:600;color:var(--white);line-height:1.65;margin-bottom:1.75rem">${esc(c.about.intro)}</p>`;
+        (c.about.paragraphs || []).forEach((p, i) => {
+          const d = delays[i + 1] || (i * 0.05);
+          html += `<p class="reveal" style="transition-delay:${d}s">${esc(p)}</p>`;
+        });
+        aboutText.innerHTML = html;
+      }
+
+      const aboutImg = el('cms-about-img');
+      if (aboutImg && c.about.aboutImage) aboutImg.src = c.about.aboutImage;
+
+      // Skills grid
+      const skillsGrid = el('cms-skills-grid');
+      if (skillsGrid && c.about.skills) {
+        skillsGrid.innerHTML = c.about.skills.map((s, i) =>
+          `<div class="card reveal" ${i ? `style="transition-delay:${i*0.06}s"` : ''}><h3>${esc(s.title)}</h3><p>${esc(s.desc)}</p></div>`
+        ).join('');
+      }
+
+      // Tags
+      const tagsEl = el('cms-about-tags');
+      if (tagsEl && c.about.tags) {
+        tagsEl.innerHTML = c.about.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('');
+      }
+
+      // Photo strip
+      const strip = el('cms-photo-strip');
+      if (strip && c.about.photos) {
+        strip.innerHTML = c.about.photos.map(p =>
+          `<div class="photo-strip-item"><img src="${esc(p.src)}" alt="${esc(p.alt)}" loading="lazy"></div>`
+        ).join('');
+      }
+
+      // ── Performance ──
+      setText('cms-perf-intro', c.performance.intro);
+      const perfGrid = el('cms-perf-grid');
+      if (perfGrid && c.performance.productions) {
+        perfGrid.innerHTML = c.performance.productions.map((p, i) =>
+          `<div class="perf-card reveal" ${i ? `style="transition-delay:${i*0.07}s"` : ''}>
+            <div class="role">${esc(p.role)}</div>
+            <h3>"${esc(p.title)}"</h3>
+            <div class="meta">${esc(p.meta)}</div>
+          </div>`
+        ).join('');
+      }
+
+      // ── CV ──
+      setText('cms-cv-profile', c.cv.profile);
+
+      const cvExp = el('cms-cv-exp');
+      if (cvExp && c.cv.experience) {
+        cvExp.innerHTML = c.cv.experience.map(e =>
+          `<div class="t-item reveal">
+            <div class="t-date">${esc(e.date)}</div>
+            <div class="t-content">
+              <h3>${esc(e.title)} — <span style="color:var(--muted);font-weight:400">${esc(e.org)}</span></h3>
+              <ul>${(e.bullets||[]).map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+            </div>
+          </div>`
+        ).join('');
+      }
+
+      const cvEdu = el('cms-cv-edu');
+      if (cvEdu && c.cv.education) {
+        cvEdu.innerHTML = c.cv.education.map(e =>
+          `<div class="t-item reveal">
+            <div class="t-date">${esc(e.date)}</div>
+            <div class="t-content"><h3>${esc(e.title)}</h3><p>${esc(e.detail)}</p></div>
+          </div>`
+        ).join('');
+      }
+
+      const theatreTags = el('cms-theatre-tags');
+      if (theatreTags && c.cv.theatreSkills) {
+        theatreTags.innerHTML = c.cv.theatreSkills.map(t => `<span class="tag">${esc(t)}</span>`).join('');
+      }
+
+      const itTags = el('cms-it-tags');
+      if (itTags && c.cv.itSkills) {
+        itTags.innerHTML = c.cv.itSkills.map(t => `<span class="tag">${esc(t)}</span>`).join('');
+      }
+
+      // ── NODA ──
+      setText('cms-noda-intro', c.noda.intro);
+      const nodaGrid = el('cms-noda-grid');
+      if (nodaGrid && c.noda.reviews) {
+        nodaGrid.innerHTML = c.noda.reviews.map((r, i) =>
+          `<div class="noda-card reveal" ${i ? `style="transition-delay:${i*0.07}s"` : ''}>
+            <div class="noda-meta">
+              <span class="noda-role">${esc(r.role)}</span>
+              <span class="noda-date">${esc(r.date)}</span>
+            </div>
+            ${r.badge ? '<div class="noda-badge">★ Named in review</div>' : ''}
+            <h3>${esc(r.title)}</h3>
+            <div class="noda-venue">${esc(r.venue)}</div>
+            ${r.quote ? `<div class="noda-quote">"${r.quote}"</div>` : ''}
+            <a href="${esc(r.link)}" target="_blank" rel="noopener noreferrer" class="noda-link">Read Full Report →</a>
+          </div>`
+        ).join('');
+      }
+
+      // ── Contact ──
+      const locEl = el('cms-contact-location');
+      if (locEl && c.contact.location) {
+        locEl.innerHTML = c.contact.location.replace(/\n/g, '<br>');
+      }
+      const openToEl = el('cms-contact-openTo');
+      if (openToEl && c.contact.openTo) {
+        openToEl.innerHTML = c.contact.openTo.replace(/\n/g, '<br>');
+      }
+      setAttr('cms-social-instagram', 'href', c.contact.social.instagram);
+      setAttr('cms-social-linkedin',  'href', c.contact.social.linkedin);
+      setAttr('cms-social-github',    'href', c.contact.social.github);
+
+      // Re-run reveal for any newly injected elements
+      setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+          if (el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add('visible');
+        });
+      }, 50);
+
+      // Re-run timeline draw-in observer for newly injected timeline items
+      if (typeof IntersectionObserver !== 'undefined') {
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('t-in'); obs.unobserve(e.target); } });
+        }, { threshold: 0.25 });
+        document.querySelectorAll('.t-item:not(.t-in)').forEach(item => {
+          item.querySelectorAll('.t-content').forEach(tc => {
+            if (!tc.querySelector('.t-line-fill')) {
+              const fill = document.createElement('div');
+              fill.className = 't-line-fill';
+              tc.insertBefore(fill, tc.firstChild);
+            }
+          });
+          obs.observe(item);
+        });
+      }
+    }
+  })();
   </script>
 </body>
 </html>

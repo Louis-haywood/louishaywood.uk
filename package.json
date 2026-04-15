@@ -1,0 +1,14 @@
+{
+  "name": "louishaywood-uk-cms",
+  "version": "1.0.0",
+  "description": "Local CMS server for louishaywood.uk",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "npx nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^2.1.1"
+  }
+}

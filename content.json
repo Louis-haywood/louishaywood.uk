@@ -1,0 +1,126 @@
+{
+  "hero": {
+    "badge": "Technical Theatre · Birmingham",
+    "firstName": "Louis",
+    "lastName": "Haywood",
+    "description": "Sound designer and live audio engineer — Birmingham Ormiston Academy Stage & Screen. Mixing live shows, designing soundscapes, getting it right every night.",
+    "heroImage": "https://louishaywood.uk/images/IMG_4902.jpg",
+    "heroCaption": "SpongeBob The Musical · Feb 2026",
+    "overlayImage": "https://louishaywood.uk/pfp.jpg",
+    "stats": [
+      { "num": "7", "label": "Years of experience" },
+      { "num": "12+", "label": "Productions" },
+      { "num": "5", "label": "NODA reviews" }
+    ]
+  },
+  "ticker": "Sound Design · QLab 5 · Behringer X32 · Allen & Heath SQ7 · EOS ETC Lighting · Live Audio · Dante Networking · Follow Spot · Stage Management · Technical Theatre",
+  "banner": {
+    "title": "SpongeBob The Musical — Sound Designer & QLab Operator",
+    "desc": "Full soundscape design and QLab operation across all rehearsals & shows · The Core Theatre, Solihull · Feb 2026"
+  },
+  "specialisms": [
+    { "num": "01", "title": "Sound & Audio", "desc": "Behringer X32, Allen & Heath SQ7, QLab 5 — live mixing for events, musicals, and concert productions." },
+    { "num": "02", "title": "Lighting", "desc": "EOS ETC systems — programming, cueing, and live operation for stage productions and events." },
+    { "num": "03", "title": "Backstage Ops", "desc": "Technical theatre, rigging, show running, and real-time problem solving under pressure." }
+  ],
+  "portfolio": [
+    { "cat": "sound", "title": "SpongeBob The Musical", "role": "Sound Designer & QLab Operator", "overlayRole": "Sound Designer · QLab Operator", "venue": "The Core Theatre, Solihull", "date": "February 2026", "desc": "Designed the full soundscape and operated QLab across all rehearsals and performances. Worked closely with the stage management team on all sound effects and liaised with the director throughout.", "image": "https://louishaywood.uk/images/IMG_4902.jpg" },
+    { "cat": "sound", "title": "SpongeBob The Musical", "role": "Sound Designer & QLab Operator", "overlayRole": "Sound Designer", "venue": "The Core Theatre, Solihull", "date": "February 2026", "desc": "Designed the full soundscape and operated QLab across all rehearsals and performances.", "image": "https://louishaywood.uk/images/IMG_4869.jpg" },
+    { "cat": "sound", "title": "Live Band Performance", "role": "Sound Engineer", "overlayRole": "Sound Engineer", "venue": "BOA Creative, Digital & Performing Arts Academy", "date": "October 2025", "desc": "Sound engineer on this gig, routing the band and live mixing throughout performances.", "image": "https://louishaywood.uk/images/IMG_3764.jpg" },
+    { "cat": "industry", "title": "PRG Longbridge Visit", "role": "Industry Visit", "overlayRole": "Industry Visit", "venue": "Longbridge", "date": "November 2025", "desc": "Tour around PRG Longbridge showing the general operations of their main facility.", "image": "https://louishaywood.uk/images/IMG_3704.jpg" },
+    { "cat": "sound", "title": "Production", "role": "Sound Engineer", "overlayRole": "Sound Engineer", "venue": "Venue", "date": "Date", "desc": "Description of work on this production.", "image": "https://louishaywood.uk/images/IMG_3516.jpg" },
+    { "cat": "sound", "title": "Production", "role": "Role", "overlayRole": "Role", "venue": "Venue", "date": "Date", "desc": "Description of work on this production.", "image": "https://louishaywood.uk/images/08EF5BF3-D676-4297-B583-526DAFDCFF4E.JPG" },
+    { "cat": "sound", "title": "SpongeBob The Musical", "role": "Sound Designer & QLab Operator", "overlayRole": "Sound Designer", "venue": "The Core Theatre, Solihull", "date": "February 2026", "desc": "Designed the full soundscape and operated QLab across all rehearsals and performances.", "image": "https://louishaywood.uk/images/IMG_4858.jpg" },
+    { "cat": "sound", "title": "Production", "role": "Role", "overlayRole": "Role", "venue": "Venue", "date": "Date", "desc": "Description.", "image": "https://louishaywood.uk/images/IMG_1290.JPEG" },
+    { "cat": "sound", "title": "Production", "role": "Role", "overlayRole": "Role", "venue": "Venue", "date": "Date", "desc": "Description.", "image": "https://louishaywood.uk/images/IMG_1294.JPEG" },
+    { "cat": "sound", "title": "Production", "role": "Role", "overlayRole": "Role", "venue": "Venue", "date": "Date", "desc": "Description.", "image": "https://louishaywood.uk/images/f624718c-7394-49c5-a004-057e40c78cb7.png" },
+    { "cat": "sound", "title": "Production", "role": "Role", "overlayRole": "Role", "venue": "Venue", "date": "Date", "desc": "Description.", "image": "https://louishaywood.uk/images/af321e4d-f156-4a79-8537-99e3699c985e.png" },
+    { "cat": "sound", "title": "SpongeBob The Musical", "role": "Sound Designer & QLab Operator", "overlayRole": "Sound Designer", "venue": "The Core Theatre, Solihull", "date": "February 2026", "desc": "Designed the full soundscape and operated QLab across all rehearsals and performances.", "image": "https://louishaywood.uk/images/IMG_4850.jpg" },
+    { "cat": "sound", "title": "Production", "role": "Role", "overlayRole": "Role", "venue": "Venue", "date": "Date", "desc": "Description.", "image": "https://louishaywood.uk/images/IMG_1244.JPEG" },
+    { "cat": "sound", "title": "Production", "role": "Role", "overlayRole": "Role", "venue": "Venue", "date": "Date", "desc": "Description.", "image": "https://louishaywood.uk/images/IMG_9779.JPEG" },
+    { "cat": "sound", "title": "Production", "role": "Role", "overlayRole": "Role", "venue": "Venue", "date": "Date", "desc": "Description.", "image": "https://louishaywood.uk/images/Screenshot%202025-05-07%20182940.png" },
+    { "cat": "sound", "title": "Production", "role": "Role", "overlayRole": "Role", "venue": "Venue", "date": "Date", "desc": "Description.", "image": "https://louishaywood.uk/images/Screenshot%202025-05-07%20183125.png" },
+    { "cat": "sound", "title": "Production", "role": "Role", "overlayRole": "Role", "venue": "Venue", "date": "Date", "desc": "Description.", "image": "https://louishaywood.uk/images/Screenshot%202025-05-07%20183118.png" }
+  ],
+  "about": {
+    "intro": "Technical Theatre student specialising in sound design — moving from stage to desk, and loving every second of it.",
+    "paragraphs": [
+      "I'm Louis, a BOA Stage & Screen Technical Theatre student in Year 12. My theatre journey began on stage, performing in productions such as Popstars' 90s Musical (2019), Oklahoma! (2020), Battle of Boat (2022), Bugsy Malone (2023), and The Wizard of Oz (2024). Over time I discovered my passion lay behind the scenes — especially in sound.",
+      "In 2025 I moved fully into sound with SOSage and Cookie Theatre Company, leading audio for live performances: programming and running sound effects, balancing levels, supporting rehearsals, and troubleshooting in real time.",
+      "Alongside this, I've built more than four years of experience at Alderbrook School, working extensively with the Behringer X32 digital sound desk. I've mixed live audio for We Will Rock You, Grease, The Wizard of Oz, High School Musical, and National Theatre Connections at the Royal & Derngate, Northampton.",
+      "Proficient in QLab 5 — building and running cue stacks, triggering effects, and synchronising sound with other technical elements, including managing inputs and outputs, EQ, and solving problems under pressure."
+    ],
+    "aboutImage": "https://louishaywood.uk/images/me.jpg",
+    "skills": [
+      { "title": "Communication", "desc": "Comfortable explaining ideas, giving direction, and working with different teams on and off stage." },
+      { "title": "Strong Teamwork", "desc": "Used to collaborating with actors, directors, and tech crews to keep everything running smoothly." },
+      { "title": "Problem Solving", "desc": "Able to think fast and sort issues during live shows or tight turnarounds." },
+      { "title": "Technical Ability", "desc": "Deep understanding of modern computer systems and professional audio/lighting hardware." },
+      { "title": "Time Management", "desc": "Always prepared, organised, and on schedule for rehearsals and events." },
+      { "title": "Creative", "desc": "Able to shape ideas, adapt quickly, and bring fresh solutions when plans change." }
+    ],
+    "tags": [
+      "Behringer X32", "Allen & Heath SQ7", "QLab 5", "EOS ETC Lighting",
+      "Live Sound Mixing", "Sound Design", "Follow Spot Operation",
+      "EQ & Gain Management", "Troubleshooting", "Stage Rigging",
+      "Show Running", "Dante Networking"
+    ],
+    "photos": [
+      { "src": "https://louishaywood.uk/images/IMG_4902.jpg", "alt": "SpongeBob The Musical stage production at The Core Theatre, Solihull" },
+      { "src": "https://louishaywood.uk/images/IMG_3704.jpg", "alt": "PRG Longbridge industry visit" },
+      { "src": "https://louishaywood.uk/images/IMG_1290.JPEG", "alt": "Stage production" }
+    ]
+  },
+  "performance": {
+    "intro": "My theatre journey began on stage — these roles gave me the empathy to work alongside performers as a sound operator and technician.",
+    "productions": [
+      { "role": "Uncle Henry & The Guard", "title": "The Wizard of Oz", "meta": "March 2024 · Artrix Theatre, Bromsgrove" },
+      { "role": "Fat Sam (Semi-lead)", "title": "Bugsy Malone", "meta": "March 2023 · The Core Theatre, Solihull" },
+      { "role": "Jimmy", "title": "Battle of Boat", "meta": "March 2022 · Core Theatre, Solihull" },
+      { "role": "Ensemble", "title": "Oklahoma!", "meta": "March 2020 · The Core Theatre" },
+      { "role": "Ensemble", "title": "Popstars' 90s Musical", "meta": "March 2019 · The Core Theatre" }
+    ]
+  },
+  "cv": {
+    "profile": "Enthusiastic and technically adept theatre technician with practical experience in sound design, live audio mixing, and stage production. Skilled in supporting live performances through precision, teamwork, and problem solving under pressure. Adept at operating industry-standard equipment and working collaboratively with production teams to deliver high-quality theatrical experiences.",
+    "experience": [
+      { "date": "Feb – Apr 2026", "title": "Sound Designer", "org": "Shakespeare in Love, The BOA Group", "bullets": ["Designed the soundscape for the production.", "Created a time and location established soundscape.", "Liaised with the director to perfect the design."] },
+      { "date": "Feb 2026", "title": "Sound Designer & QLab Operator", "org": "SpongeBob, The Core Theatre Solihull", "bullets": ["Took notes during rehearsals to brief the technical team effectively.", "Managed QLab for all rehearsals and shows, covering all sound effects.", "Led as sound designer, taking responsibility for the overall soundscape.", "Worked closely with the stage management team."] },
+      { "date": "Jan – Feb 2026", "title": "Sound Technician", "org": "FAME, John Henry Newman Catholic College", "bullets": ["Live mixing across all rehearsals and performances.", "Mic'd performers and carried out sound and quality checks.", "Managed QLab for sound cues throughout the run."] },
+      { "date": "Nov – Dec 2025", "title": "QLab Swing & Follow Spot", "org": "Cinderella, The Old Rep", "bullets": ["Provided technical cover, stepping in as QLab Operator and Follow Spot.", "Responded directly to cues from stage management."] },
+      { "date": "Feb 2025", "title": "Sound Designer & Technician", "org": "Zombie Prom, Alderbrook School", "bullets": ["Designed the production's soundscape end-to-end.", "Live mixed 12 microphones plus a live band of 10 instruments.", "Conducted sound checks and quality control prior to each performance."] },
+      { "date": "Sep 2020 – Jun 2025", "title": "Stage Crew", "org": "Alderbrook School", "bullets": ["Led technical setup and sound design for school productions.", "Mixed live audio for We Will Rock You, Grease, The Wizard of Oz, High School Musical.", "Collaborated with teams to ensure seamless show execution."] }
+    ],
+    "education": [
+      { "date": "Sep 2025 – Present", "title": "Birmingham Ormiston Academy — Stage & Screen", "detail": "Level 3 in Technical Theatre and Live Events." },
+      { "date": "Sep 2020 – Jun 2025", "title": "Alderbrook School", "detail": "GCSE Grade 4 — Drama (sound design) · GCSE Grade 4 — Photography · Level 2 Distinction — iMedia" }
+    ],
+    "theatreSkills": [
+      "Behringer X32", "Allen & Heath SQ7", "QLab 5", "EOS ETC Lighting",
+      "Live Sound Mixing", "Sound Design", "Microphone Management",
+      "Follow Spot Operation", "Stage Management Comms", "Dante Networking"
+    ],
+    "itSkills": ["Word", "Excel", "PowerPoint", "Google Workspace", "Blender", "Visual Studio Code", "Windows", "macOS"]
+  },
+  "noda": {
+    "intro": "Independent show reviews from the National Operatic and Dramatic Association — the UK's largest amateur theatre organisation.",
+    "reviews": [
+      { "role": "Uncle Henry", "date": "2 Mar 2024", "badge": true, "title": "The Wizard of Oz", "venue": "Sosage Factory · The Artrix, Bromsgrove", "quote": "Great support also came from Halle Kwarteng and <strong>Louis Haywood</strong> as Aunt Em and Uncle Henry.<br><br>The entire company worked well together with some lovely singing and acting.", "link": "https://www.noda.org.uk/show-reports/the-wizard-of-oz-1711293977" },
+      { "role": "Fat Sam", "date": "4 Mar 2023", "badge": true, "title": "Bugsy Malone", "venue": "Sosage Factory · The Core Theatre, Solihull", "quote": "The battle between <strong>Fat Sam (Louis Haywood)</strong> and Dandy Dan's gang was excellent.<br><br>Our future is secure with this society full of talented members.", "link": "https://www.noda.org.uk/show-reports/bugsy-malone-1678731617" },
+      { "role": "Sound Technician", "date": "22 Feb 2025", "badge": false, "title": "Zombie Prom", "venue": "Sosage Factory · Alderbrook School, Solihull", "quote": "The singing both principals and chorus could be heard.<br><br>Congratulations to the cast and crew… the very talented members of SOSage Factory did it proud.", "link": "https://www.noda.org.uk/show-reports/zombie-prom-1741031018" },
+      { "role": "Sound Technician", "date": "28 Feb 2026", "badge": false, "title": "SpongeBob The Musical", "venue": "Sosage Factory · The Core Theatre, Solihull", "quote": "", "link": "https://www.noda.org.uk/show-reports/the-spongebob-musical-1773167506" },
+      { "role": "Sound Technician", "date": "6 Jul 2025", "badge": false, "title": "Sosage Does It Again", "venue": "Sosage Factory · Village Hall, Knowle", "quote": "The sound was good and not too loud so that every word could be heard.<br><br>Another sell out performance from this group of very talented young people.", "link": "https://www.noda.org.uk/show-reports/sosage-does-it-again" },
+      { "role": "Cast — Jimmy", "date": "5 Mar 2022", "badge": false, "title": "The Battle of the Boat", "venue": "Sosage Factory · Core Theatre, Solihull", "quote": "The remaining cast and chorus gave their all in this wonderful production.<br><br>Two hours of emotive drama that was heart-warming, funny and really entertaining.", "link": "https://www.noda.org.uk/show-reports/the-battle-of-the-boat" }
+    ]
+  },
+  "contact": {
+    "location": "West Midlands, UK\nAvailable for regional & touring work.",
+    "openTo": "Theatre productions · Live events\nAssistant technical roles · Work placements",
+    "social": {
+      "instagram": "https://www.instagram.com/louis.haywood",
+      "linkedin": "https://www.linkedin.com/in/louis-haywood-ab9026373/",
+      "github": "https://github.com/Louis-haywood"
+    },
+    "instagramEmbedUrl": "https://www.instagram.com/reel/DV9pyE6jLg1/?utm_source=ig_embed&utm_campaign=loading"
+  }
+}

@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio CMS — Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black:   #0d0d0d;
+      --surface: #141414;
+      --surface2:#1c1c1c;
+      --border:  rgba(255,255,255,0.08);
+      --amber:   #ff6532;
+      --amber-b: #ffb400;
+      --white:   #f5f0e8;
+      --muted:   #6b6560;
+      --green:   #5ecb7a;
+      --red:     #ff4d4d;
+      --sans:    'Inter', sans-serif;
+      --mono:    'JetBrains Mono', monospace;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:var(--sans); background:var(--black); color:var(--white); min-height:100vh; }
+
+    /* LOGIN */
+    #login-screen { position:fixed; inset:0; background:var(--black); display:flex; align-items:center; justify-content:center; z-index:9999; }
+    .login-box { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:2.5rem; width:100%; max-width:380px; }
+    .login-box h1 { font-size:1.4rem; font-weight:800; letter-spacing:-0.03em; margin-bottom:0.35rem; }
+    .login-box p { color:var(--muted); font-size:0.82rem; margin-bottom:2rem; }
+    .login-box input { width:100%; background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:0.8rem 1rem; color:var(--white); font-size:0.9rem; font-family:var(--mono); margin-bottom:1rem; outline:none; }
+    .login-box input:focus { border-color:rgba(255,101,50,0.5); }
+    .login-box .err { color:var(--red); font-size:0.78rem; margin-bottom:0.75rem; display:none; }
+
+    /* LAYOUT */
+    #app { display:none; min-height:100vh; }
+    header { background:var(--surface); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+    .header-left { display:flex; align-items:center; gap:1rem; }
+    .header-logo { font-weight:800; font-size:0.9rem; letter-spacing:-0.02em; }
+    .header-logo span { color:var(--amber); }
+    #save-status { font-family:var(--mono); font-size:0.65rem; letter-spacing:0.08em; padding:0.3rem 0.75rem; border-radius:6px; border:1px solid transparent; }
+    .status-saved   { color:var(--green); border-color:rgba(94,203,122,0.3); background:rgba(94,203,122,0.06); }
+    .status-saving  { color:var(--amber); border-color:rgba(255,101,50,0.3); background:rgba(255,101,50,0.06); }
+    .status-error   { color:var(--red);   border-color:rgba(255,77,77,0.3); background:rgba(255,77,77,0.06); }
+
+    .layout { display:grid; grid-template-columns:220px 1fr; min-height:calc(100vh - 60px); }
+    aside { background:var(--surface); border-right:1px solid var(--border); padding:1.5rem 0; position:sticky; top:60px; height:calc(100vh - 60px); overflow-y:auto; }
+    .nav-section { font-family:var(--mono); font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); padding:0 1.25rem; margin:1.25rem 0 0.5rem; }
+    aside a { display:flex; align-items:center; gap:0.6rem; font-size:0.8rem; font-weight:500; color:var(--muted); text-decoration:none; padding:0.55rem 1.25rem; transition:all 0.15s; border-left:2px solid transparent; }
+    aside a:hover { color:var(--white); background:rgba(255,255,255,0.04); }
+    aside a.active { color:var(--amber); border-left-color:var(--amber); background:rgba(255,101,50,0.05); }
+    .dot { width:6px; height:6px; border-radius:50%; background:var(--surface2); flex-shrink:0; }
+    aside a.active .dot { background:var(--amber); }
+
+    main { padding:2.5rem; max-width:900px; }
+    .section-panel { display:none; }
+    .section-panel.active { display:block; }
+    .panel-title { font-size:1.5rem; font-weight:800; letter-spacing:-0.03em; margin-bottom:0.35rem; }
+    .panel-desc { color:var(--muted); font-size:0.82rem; margin-bottom:2rem; line-height:1.6; }
+
+    /* FORM ELEMENTS */
+    .field { margin-bottom:1.25rem; }
+    .field label { display:block; font-size:0.72rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:var(--muted); margin-bottom:0.45rem; }
+    .field input, .field textarea, .field select {
+      width:100%; background:var(--surface2); border:1px solid var(--border); border-radius:8px;
+      padding:0.75rem 1rem; color:var(--white); font-size:0.875rem; font-family:var(--sans);
+      outline:none; transition:border-color 0.2s; resize:vertical;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus { border-color:rgba(255,101,50,0.45); }
+    .field textarea { min-height:90px; }
+    .field .hint { font-size:0.7rem; color:var(--muted); margin-top:0.35rem; }
+    .field select option { background:var(--surface2); }
+
+    .row-2 { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .row-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; }
+
+    /* CARDS (repeatable items) */
+    .cards-list { display:flex; flex-direction:column; gap:1rem; }
+    .item-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+    .item-card-header { display:flex; align-items:center; justify-content:space-between; padding:0.9rem 1.1rem; cursor:pointer; user-select:none; gap:1rem; }
+    .item-card-header:hover { background:rgba(255,255,255,0.03); }
+    .item-card-title { font-size:0.875rem; font-weight:600; flex:1; }
+    .item-card-sub   { font-size:0.72rem; color:var(--muted); font-family:var(--mono); }
+    .item-card-body  { padding:1.25rem; border-top:1px solid var(--border); display:none; }
+    .item-card.open .item-card-body { display:block; }
+    .item-card-actions { display:flex; gap:0.5rem; }
+    .chevron { transition:transform 0.2s; color:var(--muted); font-size:0.7rem; }
+    .item-card.open .chevron { transform:rotate(180deg); }
+
+    /* BUTTONS */
+    .btn { display:inline-flex; align-items:center; gap:0.45rem; font-size:0.78rem; font-weight:600; padding:0.6rem 1.2rem; border-radius:8px; cursor:pointer; border:none; transition:all 0.2s; font-family:var(--sans); }
+    .btn-primary { background:var(--amber); color:#0d0d0d; }
+    .btn-primary:hover { opacity:0.85; transform:translateY(-1px); }
+    .btn-outline { background:transparent; color:var(--white); border:1px solid var(--border); }
+    .btn-outline:hover { border-color:rgba(255,255,255,0.2); background:rgba(255,255,255,0.05); }
+    .btn-danger { background:transparent; color:var(--red); border:1px solid rgba(255,77,77,0.25); font-size:0.72rem; padding:0.4rem 0.8rem; }
+    .btn-danger:hover { background:rgba(255,77,77,0.08); }
+    .btn-add { display:flex; align-items:center; gap:0.5rem; background:rgba(255,101,50,0.07); border:1px dashed rgba(255,101,50,0.3); color:var(--amber); border-radius:8px; padding:0.7rem 1.2rem; cursor:pointer; width:100%; justify-content:center; font-size:0.8rem; font-weight:600; font-family:var(--sans); transition:all 0.2s; margin-top:0.75rem; }
+    .btn-add:hover { background:rgba(255,101,50,0.12); }
+    .btn-sm { font-size:0.68rem; padding:0.35rem 0.7rem; }
+
+    /* SAVE BAR */
+    .save-bar { display:flex; align-items:center; justify-content:flex-end; gap:1rem; margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border); }
+    .save-bar .hint { font-size:0.72rem; color:var(--muted); flex:1; }
+
+    /* IMAGE UPLOAD */
+    .img-upload-wrap { display:flex; gap:1rem; align-items:flex-start; }
+    .img-preview { width:100px; height:75px; border-radius:8px; background:var(--surface2); border:1px solid var(--border); overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:0.65rem; }
+    .img-preview img { width:100%; height:100%; object-fit:cover; }
+    .img-upload-right { flex:1; display:flex; flex-direction:column; gap:0.5rem; }
+    .img-url-input { margin:0; }
+
+    /* TAGS EDITOR */
+    .tags-editor { display:flex; flex-wrap:wrap; gap:0.4rem; background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:0.6rem; min-height:52px; cursor:text; }
+    .tags-editor:focus-within { border-color:rgba(255,101,50,0.45); }
+    .tag-pill { display:inline-flex; align-items:center; gap:0.3rem; background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:0.2rem 0.55rem; font-size:0.72rem; font-family:var(--mono); color:var(--white); }
+    .tag-pill button { background:none; border:none; color:var(--muted); cursor:pointer; font-size:0.75rem; line-height:1; padding:0; transition:color 0.15s; }
+    .tag-pill button:hover { color:var(--red); }
+    .tag-input { background:none; border:none; outline:none; color:var(--white); font-size:0.78rem; min-width:120px; font-family:var(--sans); }
+
+    /* DRAG HANDLE */
+    .drag-handle { cursor:grab; color:var(--muted); padding:0 0.25rem; font-size:0.75rem; flex-shrink:0; }
+    .drag-handle:active { cursor:grabbing; }
+
+    /* TOAST */
+    #toast { position:fixed; bottom:2rem; right:2rem; padding:0.85rem 1.4rem; border-radius:10px; font-size:0.82rem; font-weight:600; z-index:9999; transform:translateY(8px); opacity:0; transition:all 0.3s; pointer-events:none; }
+    #toast.show { transform:none; opacity:1; }
+    #toast.success { background:#1a2e1f; border:1px solid rgba(94,203,122,0.35); color:var(--green); }
+    #toast.error   { background:#2e1a1a; border:1px solid rgba(255,77,77,0.35); color:var(--red); }
+
+    @media(max-width:768px){ .layout{grid-template-columns:1fr;} aside{position:static;height:auto;} }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>Portfolio <span style="color:var(--amber)">CMS</span></h1>
+    <p>Enter your admin password to continue.</p>
+    <div class="err" id="login-err">Incorrect password. Try again.</div>
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="current-password">
+    <button class="btn btn-primary" style="width:100%" onclick="doLogin()">Sign In</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <header>
+    <div class="header-left">
+      <div class="header-logo">Louis Haywood <span>CMS</span></div>
+      <div id="save-status"></div>
+    </div>
+    <div style="display:flex;gap:0.75rem;align-items:center">
+      <a href="/" target="_blank" class="btn btn-outline btn-sm" style="font-size:0.72rem">View Site ↗</a>
+      <button class="btn btn-primary btn-sm" onclick="saveAll()">Save All Changes</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside id="sidebar">
+      <div class="nav-section">Pages</div>
+      <a href="#" class="active" data-panel="hero"      onclick="showPanel('hero',this)"><span class="dot"></span>Hero</a>
+      <a href="#" data-panel="portfolio"  onclick="showPanel('portfolio',this)"><span class="dot"></span>Portfolio</a>
+      <a href="#" data-panel="about"      onclick="showPanel('about',this)"><span class="dot"></span>About</a>
+      <a href="#" data-panel="performance" onclick="showPanel('performance',this)"><span class="dot"></span>Performance</a>
+      <a href="#" data-panel="cv"         onclick="showPanel('cv',this)"><span class="dot"></span>CV</a>
+      <a href="#" data-panel="noda"       onclick="showPanel('noda',this)"><span class="dot"></span>NODA</a>
+      <a href="#" data-panel="contact"    onclick="showPanel('contact',this)"><span class="dot"></span>Contact</a>
+    </aside>
+
+    <main>
+
+      <!-- HERO -->
+      <div class="section-panel active" id="panel-hero">
+        <div class="panel-title">Hero</div>
+        <div class="panel-desc">The main landing section — badge, name, description, stats, and hero image.</div>
+
+        <div class="field">
+          <label>Badge Text</label>
+          <input type="text" id="hero-badge">
+          <div class="hint">Shown in the orange pill above your name. E.g. "Technical Theatre · Birmingham"</div>
+        </div>
+        <div class="row-2">
+          <div class="field"><label>First Name</label><input type="text" id="hero-firstName"></div>
+          <div class="field"><label>Last Name (accent colour)</label><input type="text" id="hero-lastName"></div>
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <textarea id="hero-desc"></textarea>
+        </div>
+        <div class="field">
+          <label>Hero Caption (bottom-left of image)</label>
+          <input type="text" id="hero-heroCaption">
+        </div>
+        <div class="field">
+          <label>Hero Background Image URL</label>
+          <div class="img-upload-wrap">
+            <div class="img-preview" id="heroImg-preview"><img id="heroImg-thumb" src="" style="display:none" alt=""></div>
+            <div class="img-upload-right">
+              <input type="text" id="hero-heroImage" class="img-url-input" placeholder="https://... or images/filename.jpg" oninput="previewImg('heroImg','hero-heroImage')">
+              <label class="btn btn-outline btn-sm" style="cursor:pointer;width:fit-content">
+                Upload image <input type="file" accept="image/*" style="display:none" onchange="uploadImg(this,'hero-heroImage','heroImg')">
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Overlay / Profile Image URL</label>
+          <div class="img-upload-wrap">
+            <div class="img-preview" id="overlayImg-preview"><img id="overlayImg-thumb" src="" style="display:none" alt=""></div>
+            <div class="img-upload-right">
+              <input type="text" id="hero-overlayImage" class="img-url-input" placeholder="https://... or images/filename.jpg" oninput="previewImg('overlayImg','hero-overlayImage')">
+              <label class="btn btn-outline btn-sm" style="cursor:pointer;width:fit-content">
+                Upload image <input type="file" accept="image/*" style="display:none" onchange="uploadImg(this,'hero-overlayImage','overlayImg')">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Stats</label>
+          <div class="cards-list" id="stats-list"></div>
+          <button class="btn-add" onclick="addStat()">+ Add Stat</button>
+        </div>
+
+        <div style="border-top:1px solid var(--border);margin:2rem 0 1.5rem"></div>
+        <div class="panel-title" style="font-size:1.1rem">Latest Project Banner</div>
+        <div class="field" style="margin-top:1rem">
+          <label>Banner Title</label>
+          <input type="text" id="banner-title">
+        </div>
+        <div class="field">
+          <label>Banner Description</label>
+          <input type="text" id="banner-desc">
+        </div>
+
+        <div style="border-top:1px solid var(--border);margin:2rem 0 1.5rem"></div>
+        <div class="panel-title" style="font-size:1.1rem">Specialisms</div>
+        <div class="cards-list" id="specialisms-list" style="margin-top:1rem"></div>
+        <button class="btn-add" onclick="addSpecialism()">+ Add Specialism</button>
+
+        <div class="save-bar">
+          <span class="hint">Changes are saved to content.json on your machine.</span>
+          <button class="btn btn-primary" onclick="saveAll()">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- PORTFOLIO -->
+      <div class="section-panel" id="panel-portfolio">
+        <div class="panel-title">Portfolio</div>
+        <div class="panel-desc">Manage your portfolio cards — drag to reorder, click to expand and edit.</div>
+        <div class="cards-list" id="portfolio-list"></div>
+        <button class="btn-add" onclick="addPortfolioItem()">+ Add Portfolio Item</button>
+        <div class="save-bar">
+          <span class="hint">Cards appear in the order listed here.</span>
+          <button class="btn btn-primary" onclick="saveAll()">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="section-panel" id="panel-about">
+        <div class="panel-title">About</div>
+        <div class="panel-desc">Your bio, skills grid, tags, and about photo.</div>
+
+        <div class="field">
+          <label>Intro (bold sentence)</label>
+          <textarea id="about-intro" style="min-height:60px"></textarea>
+        </div>
+        <div class="field">
+          <label>Bio Paragraphs</label>
+          <div class="cards-list" id="about-paragraphs-list"></div>
+          <button class="btn-add" onclick="addAboutPara()">+ Add Paragraph</button>
+        </div>
+        <div class="field" style="margin-top:1.5rem">
+          <label>About Photo</label>
+          <div class="img-upload-wrap">
+            <div class="img-preview" id="aboutImg-preview"><img id="aboutImg-thumb" src="" style="display:none" alt=""></div>
+            <div class="img-upload-right">
+              <input type="text" id="about-aboutImage" class="img-url-input" oninput="previewImg('aboutImg','about-aboutImage')">
+              <label class="btn btn-outline btn-sm" style="cursor:pointer;width:fit-content">
+                Upload image <input type="file" accept="image/*" style="display:none" onchange="uploadImg(this,'about-aboutImage','aboutImg')">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid var(--border);margin:2rem 0 1.5rem"></div>
+        <div class="panel-title" style="font-size:1.1rem">Transferable Skills</div>
+        <div class="cards-list" id="skills-list" style="margin-top:1rem"></div>
+        <button class="btn-add" onclick="addSkill()">+ Add Skill</button>
+
+        <div style="border-top:1px solid var(--border);margin:2rem 0 1.5rem"></div>
+        <div class="panel-title" style="font-size:1.1rem">Technical Tags</div>
+        <div class="field" style="margin-top:1rem">
+          <label>Tags — type and press Enter to add</label>
+          <div class="tags-editor" id="about-tags-editor" onclick="this.querySelector('.tag-input').focus()"></div>
+          <div class="hint">Press Enter or comma to add. Click × to remove.</div>
+        </div>
+
+        <div style="border-top:1px solid var(--border);margin:2rem 0 1.5rem"></div>
+        <div class="panel-title" style="font-size:1.1rem">Photo Strip</div>
+        <div class="cards-list" id="about-photos-list" style="margin-top:1rem"></div>
+        <button class="btn-add" onclick="addAboutPhoto()">+ Add Photo</button>
+
+        <div class="save-bar">
+          <button class="btn btn-primary" onclick="saveAll()">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- PERFORMANCE -->
+      <div class="section-panel" id="panel-performance">
+        <div class="panel-title">Performance</div>
+        <div class="panel-desc">Your on-stage acting credits.</div>
+        <div class="field">
+          <label>Intro text</label>
+          <textarea id="perf-intro" style="min-height:60px"></textarea>
+        </div>
+        <div class="cards-list" id="perf-list"></div>
+        <button class="btn-add" onclick="addPerfItem()">+ Add Production</button>
+        <div class="save-bar">
+          <button class="btn btn-primary" onclick="saveAll()">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- CV -->
+      <div class="section-panel" id="panel-cv">
+        <div class="panel-title">CV</div>
+        <div class="panel-desc">Personal profile, experience timeline, education, and skill tags.</div>
+        <div class="field">
+          <label>Personal Profile</label>
+          <textarea id="cv-profile"></textarea>
+        </div>
+
+        <div style="border-top:1px solid var(--border);margin:2rem 0 1.5rem"></div>
+        <div class="panel-title" style="font-size:1.1rem">Technical Experience</div>
+        <div class="cards-list" id="cv-exp-list" style="margin-top:1rem"></div>
+        <button class="btn-add" onclick="addCvExp()">+ Add Experience</button>
+
+        <div style="border-top:1px solid var(--border);margin:2rem 0 1.5rem"></div>
+        <div class="panel-title" style="font-size:1.1rem">Education</div>
+        <div class="cards-list" id="cv-edu-list" style="margin-top:1rem"></div>
+        <button class="btn-add" onclick="addCvEdu()">+ Add Education</button>
+
+        <div style="border-top:1px solid var(--border);margin:2rem 0 1.5rem"></div>
+        <div class="panel-title" style="font-size:1.1rem">Theatre Skills Tags</div>
+        <div class="field" style="margin-top:1rem">
+          <label>Tags — press Enter to add</label>
+          <div class="tags-editor" id="cv-theatre-tags-editor" onclick="this.querySelector('.tag-input').focus()"></div>
+        </div>
+
+        <div style="border-top:1px solid var(--border);margin:2rem 0 1.5rem"></div>
+        <div class="panel-title" style="font-size:1.1rem">IT Skills Tags</div>
+        <div class="field" style="margin-top:1rem">
+          <label>Tags — press Enter to add</label>
+          <div class="tags-editor" id="cv-it-tags-editor" onclick="this.querySelector('.tag-input').focus()"></div>
+        </div>
+
+        <div class="save-bar">
+          <button class="btn btn-primary" onclick="saveAll()">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- NODA -->
+      <div class="section-panel" id="panel-noda">
+        <div class="panel-title">NODA Reviews</div>
+        <div class="panel-desc">Press reviews from the National Operatic and Dramatic Association.</div>
+        <div class="field">
+          <label>Section intro text</label>
+          <textarea id="noda-intro" style="min-height:60px"></textarea>
+        </div>
+        <div class="cards-list" id="noda-list"></div>
+        <button class="btn-add" onclick="addNodaItem()">+ Add Review</button>
+        <div class="save-bar">
+          <button class="btn btn-primary" onclick="saveAll()">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="section-panel" id="panel-contact">
+        <div class="panel-title">Contact</div>
+        <div class="panel-desc">Location, open-to text, and social links.</div>
+        <div class="field">
+          <label>Location (use \n for line break)</label>
+          <textarea id="contact-location" style="min-height:60px"></textarea>
+        </div>
+        <div class="field">
+          <label>Open To (use \n for line break)</label>
+          <textarea id="contact-openTo" style="min-height:60px"></textarea>
+        </div>
+        <div class="row-3">
+          <div class="field"><label>Instagram URL</label><input type="url" id="contact-instagram"></div>
+          <div class="field"><label>LinkedIn URL</label><input type="url" id="contact-linkedin"></div>
+          <div class="field"><label>GitHub URL</label><input type="url" id="contact-github"></div>
+        </div>
+        <div class="field">
+          <label>Instagram Embed URL (reel/post permalink)</label>
+          <input type="url" id="contact-instagramEmbedUrl">
+        </div>
+        <div class="save-bar">
+          <button class="btn btn-primary" onclick="saveAll()">Save Changes</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────────
+let CONTENT = null;
+let PASSWORD = '';
+
+// ── Login ──────────────────────────────────────────────────────────────────────
+function doLogin() {
+  const pw = document.getElementById('pw-input').value;
+  fetch('/api/content', { headers: { 'x-admin-password': pw } })
+    .then(r => {
+      if (r.status === 401) throw new Error('bad');
+      return r.json();
+    })
+    .then(data => {
+      PASSWORD = pw;
+      CONTENT = data;
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      populateAll();
+    })
+    .catch(() => {
+      document.getElementById('login-err').style.display = 'block';
+    });
+}
+document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+// ── Navigation ─────────────────────────────────────────────────────────────────
+function showPanel(id, el) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.querySelectorAll('#sidebar a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+  return false;
+}
+
+// ── Populate all panels from CONTENT ──────────────────────────────────────────
+function populateAll() {
+  const c = CONTENT;
+
+  // Hero
+  set('hero-badge',       c.hero.badge);
+  set('hero-firstName',   c.hero.firstName);
+  set('hero-lastName',    c.hero.lastName);
+  set('hero-desc',        c.hero.description);
+  set('hero-heroCaption', c.hero.heroCaption);
+  set('hero-heroImage',   c.hero.heroImage);
+  set('hero-overlayImage',c.hero.overlayImage);
+  previewImg('heroImg',   'hero-heroImage');
+  previewImg('overlayImg','hero-overlayImage');
+
+  set('banner-title', c.banner.title);
+  set('banner-desc',  c.banner.desc);
+
+  renderStats();
+  renderSpecialisms();
+  renderPortfolio();
+
+  // About
+  set('about-intro',      c.about.intro);
+  set('about-aboutImage', c.about.aboutImage);
+  previewImg('aboutImg', 'about-aboutImage');
+  renderAboutParagraphs();
+  renderSkills();
+  renderTagsEditor('about-tags-editor', c.about.tags, 'about-tags');
+  renderAboutPhotos();
+
+  // Performance
+  set('perf-intro', c.performance.intro);
+  renderPerf();
+
+  // CV
+  set('cv-profile', c.cv.profile);
+  renderCvExp();
+  renderCvEdu();
+  renderTagsEditor('cv-theatre-tags-editor', c.cv.theatreSkills, 'cv-theatre-tags');
+  renderTagsEditor('cv-it-tags-editor',      c.cv.itSkills,      'cv-it-tags');
+
+  // NODA
+  set('noda-intro', c.noda.intro);
+  renderNoda();
+
+  // Contact
+  set('contact-location',         c.contact.location);
+  set('contact-openTo',           c.contact.openTo);
+  set('contact-instagram',        c.contact.social.instagram);
+  set('contact-linkedin',         c.contact.social.linkedin);
+  set('contact-github',           c.contact.social.github);
+  set('contact-instagramEmbedUrl',c.contact.instagramEmbedUrl);
+}
+
+function set(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.value = val || '';
+}
+
+// ── Collect all form data back into CONTENT ────────────────────────────────────
+function collectAll() {
+  const c = CONTENT;
+
+  c.hero.badge        = get('hero-badge');
+  c.hero.firstName    = get('hero-firstName');
+  c.hero.lastName     = get('hero-lastName');
+  c.hero.description  = get('hero-desc');
+  c.hero.heroCaption  = get('hero-heroCaption');
+  c.hero.heroImage    = get('hero-heroImage');
+  c.hero.overlayImage = get('hero-overlayImage');
+
+  c.banner.title = get('banner-title');
+  c.banner.desc  = get('banner-desc');
+
+  c.hero.stats = collectStats();
+  c.specialisms = collectSpecialisms();
+  c.portfolio   = collectPortfolio();
+
+  c.about.intro       = get('about-intro');
+  c.about.aboutImage  = get('about-aboutImage');
+  c.about.paragraphs  = collectAboutParas();
+  c.about.skills      = collectSkills();
+  c.about.tags        = collectTagsFromEditor('about-tags-editor');
+  c.about.photos      = collectAboutPhotos();
+
+  c.performance.intro       = get('perf-intro');
+  c.performance.productions = collectPerf();
+
+  c.cv.profile        = get('cv-profile');
+  c.cv.experience     = collectCvExp();
+  c.cv.education      = collectCvEdu();
+  c.cv.theatreSkills  = collectTagsFromEditor('cv-theatre-tags-editor');
+  c.cv.itSkills       = collectTagsFromEditor('cv-it-tags-editor');
+
+  c.noda.intro   = get('noda-intro');
+  c.noda.reviews = collectNoda();
+
+  c.contact.location            = get('contact-location');
+  c.contact.openTo              = get('contact-openTo');
+  c.contact.social.instagram    = get('contact-instagram');
+  c.contact.social.linkedin     = get('contact-linkedin');
+  c.contact.social.github       = get('contact-github');
+  c.contact.instagramEmbedUrl   = get('contact-instagramEmbedUrl');
+}
+
+function get(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+// ── Save ───────────────────────────────────────────────────────────────────────
+function saveAll() {
+  collectAll();
+  setStatus('saving', 'Saving…');
+  fetch('/api/content', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
+    body: JSON.stringify(CONTENT)
+  })
+  .then(r => r.json())
+  .then(d => {
+    if (d.ok) { setStatus('saved', 'Saved ✓'); toast('Saved successfully!', 'success'); }
+    else throw new Error(d.error);
+  })
+  .catch(e => { setStatus('error', 'Error'); toast('Save failed: ' + e.message, 'error'); });
+}
+
+function setStatus(type, msg) {
+  const el = document.getElementById('save-status');
+  el.className = 'status-' + type;
+  el.textContent = msg;
+}
+
+function toast(msg, type) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show ' + type;
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.className = '', 3500);
+}
+
+// ── Image upload ───────────────────────────────────────────────────────────────
+function uploadImg(input, targetId, previewId) {
+  if (!input.files[0]) return;
+  const fd = new FormData();
+  fd.append('image', input.files[0]);
+  fetch('/api/upload', { method:'POST', headers:{'x-admin-password':PASSWORD}, body:fd })
+    .then(r => r.json())
+    .then(d => {
+      if (d.url) {
+        document.getElementById(targetId).value = d.url;
+        previewImg(previewId, targetId);
+        toast('Image uploaded!', 'success');
+      } else throw new Error(d.error);
+    })
+    .catch(e => toast('Upload failed: ' + e.message, 'error'));
+}
+
+function previewImg(previewId, inputId) {
+  const url = document.getElementById(inputId)?.value;
+  const thumb = document.getElementById(previewId + '-thumb');
+  if (!thumb) return;
+  if (url) { thumb.src = url; thumb.style.display = 'block'; }
+  else thumb.style.display = 'none';
+}
+
+// ── Tags editor ────────────────────────────────────────────────────────────────
+function renderTagsEditor(editorId, tags, _key) {
+  const el = document.getElementById(editorId);
+  if (!el) return;
+  el.innerHTML = '';
+  (tags || []).forEach(t => el.appendChild(makePill(t, editorId)));
+  const inp = document.createElement('input');
+  inp.className = 'tag-input';
+  inp.placeholder = 'Add tag…';
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const v = inp.value.replace(',','').trim();
+      if (v) { el.insertBefore(makePill(v, editorId), inp); inp.value = ''; }
+    } else if (e.key === 'Backspace' && !inp.value) {
+      const pills = el.querySelectorAll('.tag-pill');
+      if (pills.length) pills[pills.length-1].remove();
+    }
+  });
+  el.appendChild(inp);
+}
+
+function makePill(text, editorId) {
+  const pill = document.createElement('span');
+  pill.className = 'tag-pill';
+  pill.innerHTML = `${escHtml(text)}<button onclick="this.parentElement.remove()" title="Remove">×</button>`;
+  return pill;
+}
+
+function collectTagsFromEditor(editorId) {
+  const el = document.getElementById(editorId);
+  if (!el) return [];
+  return [...el.querySelectorAll('.tag-pill')].map(p => p.childNodes[0].textContent.trim()).filter(Boolean);
+}
+
+// ── Stats ──────────────────────────────────────────────────────────────────────
+function renderStats() {
+  const list = document.getElementById('stats-list');
+  list.innerHTML = '';
+  (CONTENT.hero.stats || []).forEach((s, i) => {
+    list.appendChild(makeStatCard(s, i));
+  });
+}
+function makeStatCard(s, i) {
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML = `
+    <div class="item-card-header" onclick="toggleCard(this)">
+      <span class="item-card-title">${escHtml(s.num)} — ${escHtml(s.label)}</span>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();removeCard(this,'stats-list',renderStats,collectStats,'hero.stats')">Remove</button>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="item-card-body">
+      <div class="row-2">
+        <div class="field"><label>Number</label><input type="text" class="stat-num" value="${escHtml(s.num)}"></div>
+        <div class="field"><label>Label</label><input type="text" class="stat-label-inp" value="${escHtml(s.label)}"></div>
+      </div>
+    </div>`;
+  return card;
+}
+function addStat() {
+  CONTENT.hero.stats.push({ num: '0', label: 'New stat' });
+  renderStats();
+}
+function collectStats() {
+  return [...document.getElementById('stats-list').querySelectorAll('.item-card')].map(c => ({
+    num:   c.querySelector('.stat-num').value.trim(),
+    label: c.querySelector('.stat-label-inp').value.trim()
+  }));
+}
+
+// ── Specialisms ────────────────────────────────────────────────────────────────
+function renderSpecialisms() {
+  const list = document.getElementById('specialisms-list');
+  list.innerHTML = '';
+  (CONTENT.specialisms || []).forEach((s, i) => list.appendChild(makeSpecCard(s, i)));
+}
+function makeSpecCard(s, i) {
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML = `
+    <div class="item-card-header" onclick="toggleCard(this)">
+      <span class="item-card-title">${escHtml(s.num)} ${escHtml(s.title)}</span>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();this.closest('.item-card').remove()">Remove</button>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="item-card-body">
+      <div class="row-2">
+        <div class="field"><label>Number</label><input type="text" class="spec-num" value="${escHtml(s.num)}"></div>
+        <div class="field"><label>Title</label><input type="text" class="spec-title" value="${escHtml(s.title)}"></div>
+      </div>
+      <div class="field"><label>Description</label><textarea class="spec-desc" style="min-height:60px">${escHtml(s.desc)}</textarea></div>
+    </div>`;
+  return card;
+}
+function addSpecialism() {
+  CONTENT.specialisms.push({ num: '04', title: 'New Specialism', desc: 'Description…' });
+  renderSpecialisms();
+}
+function collectSpecialisms() {
+  return [...document.getElementById('specialisms-list').querySelectorAll('.item-card')].map(c => ({
+    num:   c.querySelector('.spec-num').value.trim(),
+    title: c.querySelector('.spec-title').value.trim(),
+    desc:  c.querySelector('.spec-desc').value.trim()
+  }));
+}
+
+// ── Portfolio ──────────────────────────────────────────────────────────────────
+function renderPortfolio() {
+  const list = document.getElementById('portfolio-list');
+  list.innerHTML = '';
+  (CONTENT.portfolio || []).forEach((p, i) => list.appendChild(makePfCard(p, i)));
+}
+function makePfCard(p, i) {
+  const uid = 'pf-' + Date.now() + '-' + i;
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML = `
+    <div class="item-card-header" onclick="toggleCard(this)">
+      <span class="item-card-title">${escHtml(p.title)}</span>
+      <span class="item-card-sub">${escHtml(p.role)}</span>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();this.closest('.item-card').remove()">Remove</button>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="item-card-body">
+      <div class="row-2">
+        <div class="field"><label>Title</label><input type="text" class="pf-title" value="${escHtml(p.title)}"></div>
+        <div class="field"><label>Category</label>
+          <select class="pf-cat">
+            <option value="sound" ${p.cat==='sound'?'selected':''}>Sound</option>
+            <option value="industry" ${p.cat==='industry'?'selected':''}>Industry</option>
+            <option value="lighting" ${p.cat==='lighting'?'selected':''}>Lighting</option>
+          </select>
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="field"><label>Role</label><input type="text" class="pf-role" value="${escHtml(p.role)}"></div>
+        <div class="field"><label>Overlay Role (short)</label><input type="text" class="pf-overlay-role" value="${escHtml(p.overlayRole||p.role)}"></div>
+      </div>
+      <div class="row-2">
+        <div class="field"><label>Venue</label><input type="text" class="pf-venue" value="${escHtml(p.venue)}"></div>
+        <div class="field"><label>Date</label><input type="text" class="pf-date" value="${escHtml(p.date)}"></div>
+      </div>
+      <div class="field"><label>Description</label><textarea class="pf-desc">${escHtml(p.desc)}</textarea></div>
+      <div class="field"><label>Image</label>
+        <div class="img-upload-wrap">
+          <div class="img-preview"><img src="${escHtml(p.image)}" style="width:100%;height:100%;object-fit:cover" alt=""></div>
+          <div class="img-upload-right">
+            <input type="text" class="pf-image" value="${escHtml(p.image)}" oninput="this.closest('.item-card-body').querySelector('img').src=this.value">
+            <label class="btn btn-outline btn-sm" style="cursor:pointer;width:fit-content">
+              Upload <input type="file" accept="image/*" style="display:none" onchange="uploadImgToField(this)">
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  return card;
+}
+function addPortfolioItem() {
+  CONTENT.portfolio.push({ cat:'sound', title:'New Production', role:'Role', overlayRole:'Role', venue:'Venue', date:'Date', desc:'Description.', image:'' });
+  renderPortfolio();
+  // open the new card
+  const list = document.getElementById('portfolio-list');
+  const last = list.lastElementChild;
+  last.classList.add('open');
+  last.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+function collectPortfolio() {
+  return [...document.getElementById('portfolio-list').querySelectorAll('.item-card')].map(c => ({
+    cat:         c.querySelector('.pf-cat').value,
+    title:       c.querySelector('.pf-title').value.trim(),
+    role:        c.querySelector('.pf-role').value.trim(),
+    overlayRole: c.querySelector('.pf-overlay-role').value.trim(),
+    venue:       c.querySelector('.pf-venue').value.trim(),
+    date:        c.querySelector('.pf-date').value.trim(),
+    desc:        c.querySelector('.pf-desc').value.trim(),
+    image:       c.querySelector('.pf-image').value.trim()
+  }));
+}
+
+function uploadImgToField(input) {
+  if (!input.files[0]) return;
+  const card = input.closest('.item-card-body');
+  const fd = new FormData();
+  fd.append('image', input.files[0]);
+  fetch('/api/upload', { method:'POST', headers:{'x-admin-password':PASSWORD}, body:fd })
+    .then(r => r.json())
+    .then(d => {
+      if (d.url) {
+        card.querySelector('.pf-image').value = d.url;
+        card.querySelector('img').src = d.url;
+        toast('Image uploaded!', 'success');
+      } else throw new Error(d.error);
+    })
+    .catch(e => toast('Upload failed: ' + e.message, 'error'));
+}
+
+// ── About paragraphs ───────────────────────────────────────────────────────────
+function renderAboutParagraphs() {
+  const list = document.getElementById('about-paragraphs-list');
+  list.innerHTML = '';
+  (CONTENT.about.paragraphs || []).forEach((p, i) => list.appendChild(makeParaCard(p, i)));
+}
+function makeParaCard(p, i) {
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML = `
+    <div class="item-card-header" onclick="toggleCard(this)">
+      <span class="item-card-title" style="font-size:0.78rem;font-weight:400;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:500px">${escHtml(p.substring(0,80))}…</span>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();this.closest('.item-card').remove()">Remove</button>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="item-card-body">
+      <div class="field"><label>Paragraph text</label><textarea class="para-text" style="min-height:100px">${escHtml(p)}</textarea></div>
+    </div>`;
+  return card;
+}
+function addAboutPara() {
+  document.getElementById('about-paragraphs-list').appendChild(makeParaCard('New paragraph…', 0));
+}
+function collectAboutParas() {
+  return [...document.getElementById('about-paragraphs-list').querySelectorAll('.para-text')].map(t => t.value.trim());
+}
+
+// ── Skills ─────────────────────────────────────────────────────────────────────
+function renderSkills() {
+  const list = document.getElementById('skills-list');
+  list.innerHTML = '';
+  (CONTENT.about.skills || []).forEach((s, i) => list.appendChild(makeSkillCard(s, i)));
+}
+function makeSkillCard(s, i) {
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML = `
+    <div class="item-card-header" onclick="toggleCard(this)">
+      <span class="item-card-title">${escHtml(s.title)}</span>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();this.closest('.item-card').remove()">Remove</button>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="item-card-body">
+      <div class="field"><label>Title</label><input type="text" class="skill-title" value="${escHtml(s.title)}"></div>
+      <div class="field"><label>Description</label><textarea class="skill-desc" style="min-height:70px">${escHtml(s.desc)}</textarea></div>
+    </div>`;
+  return card;
+}
+function addSkill() {
+  document.getElementById('skills-list').appendChild(makeSkillCard({ title:'New Skill', desc:'Description…' }, 0));
+}
+function collectSkills() {
+  return [...document.getElementById('skills-list').querySelectorAll('.item-card')].map(c => ({
+    title: c.querySelector('.skill-title').value.trim(),
+    desc:  c.querySelector('.skill-desc').value.trim()
+  }));
+}
+
+// ── About photos ───────────────────────────────────────────────────────────────
+function renderAboutPhotos() {
+  const list = document.getElementById('about-photos-list');
+  list.innerHTML = '';
+  (CONTENT.about.photos || []).forEach((p, i) => list.appendChild(makePhotoCard(p, i)));
+}
+function makePhotoCard(p, i) {
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML = `
+    <div class="item-card-header" onclick="toggleCard(this)">
+      <span class="item-card-title" style="font-size:0.78rem">${escHtml(p.alt||p.src)}</span>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();this.closest('.item-card').remove()">Remove</button>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="item-card-body">
+      <div class="field"><label>Image URL</label>
+        <div class="img-upload-wrap">
+          <div class="img-preview"><img src="${escHtml(p.src)}" style="width:100%;height:100%;object-fit:cover" alt=""></div>
+          <div class="img-upload-right">
+            <input type="text" class="photo-src" value="${escHtml(p.src)}" oninput="this.closest('.item-card-body').querySelector('img').src=this.value">
+            <label class="btn btn-outline btn-sm" style="cursor:pointer;width:fit-content">
+              Upload <input type="file" accept="image/*" style="display:none" onchange="uploadImgToField(this)">
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="field"><label>Alt text</label><input type="text" class="photo-alt" value="${escHtml(p.alt)}"></div>
+    </div>`;
+  return card;
+}
+function addAboutPhoto() {
+  document.getElementById('about-photos-list').appendChild(makePhotoCard({ src:'', alt:'' }, 0));
+}
+function collectAboutPhotos() {
+  return [...document.getElementById('about-photos-list').querySelectorAll('.item-card')].map(c => ({
+    src: c.querySelector('.photo-src').value.trim(),
+    alt: c.querySelector('.photo-alt').value.trim()
+  }));
+}
+
+// ── Performance ────────────────────────────────────────────────────────────────
+function renderPerf() {
+  const list = document.getElementById('perf-list');
+  list.innerHTML = '';
+  (CONTENT.performance.productions || []).forEach((p, i) => list.appendChild(makePerfCard(p, i)));
+}
+function makePerfCard(p, i) {
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML = `
+    <div class="item-card-header" onclick="toggleCard(this)">
+      <span class="item-card-title">${escHtml(p.title)}</span>
+      <span class="item-card-sub">${escHtml(p.role)}</span>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();this.closest('.item-card').remove()">Remove</button>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="item-card-body">
+      <div class="row-3">
+        <div class="field"><label>Role</label><input type="text" class="perf-role" value="${escHtml(p.role)}"></div>
+        <div class="field"><label>Production Title</label><input type="text" class="perf-title" value="${escHtml(p.title)}"></div>
+        <div class="field"><label>Meta (date · venue)</label><input type="text" class="perf-meta" value="${escHtml(p.meta)}"></div>
+      </div>
+    </div>`;
+  return card;
+}
+function addPerfItem() {
+  document.getElementById('perf-list').appendChild(makePerfCard({ role:'Role', title:'Production Title', meta:'Date · Venue' }, 0));
+}
+function collectPerf() {
+  return [...document.getElementById('perf-list').querySelectorAll('.item-card')].map(c => ({
+    role:  c.querySelector('.perf-role').value.trim(),
+    title: c.querySelector('.perf-title').value.trim(),
+    meta:  c.querySelector('.perf-meta').value.trim()
+  }));
+}
+
+// ── CV Experience ──────────────────────────────────────────────────────────────
+function renderCvExp() {
+  const list = document.getElementById('cv-exp-list');
+  list.innerHTML = '';
+  (CONTENT.cv.experience || []).forEach((e, i) => list.appendChild(makeCvExpCard(e, i)));
+}
+function makeCvExpCard(e, i) {
+  const bulletsHtml = (e.bullets||[]).map(b => `<div class="bullet-row" style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><input type="text" class="cv-bullet" value="${escHtml(b)}" style="flex:1"><button class="btn btn-danger btn-sm" onclick="this.closest('.bullet-row').remove()" style="flex-shrink:0">×</button></div>`).join('');
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML = `
+    <div class="item-card-header" onclick="toggleCard(this)">
+      <span class="item-card-title">${escHtml(e.title)}</span>
+      <span class="item-card-sub">${escHtml(e.date)}</span>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();this.closest('.item-card').remove()">Remove</button>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="item-card-body">
+      <div class="row-2">
+        <div class="field"><label>Date</label><input type="text" class="cv-date" value="${escHtml(e.date)}"></div>
+        <div class="field"><label>Organisation</label><input type="text" class="cv-org" value="${escHtml(e.org)}"></div>
+      </div>
+      <div class="field"><label>Title</label><input type="text" class="cv-title" value="${escHtml(e.title)}"></div>
+      <div class="field"><label>Bullet points</label>
+        <div class="bullets-list">${bulletsHtml}</div>
+        <button class="btn btn-add" style="margin-top:0.5rem;font-size:0.72rem;padding:0.5rem 1rem" onclick="addBullet(this)">+ Add Bullet</button>
+      </div>
+    </div>`;
+  return card;
+}
+function addCvExp() {
+  document.getElementById('cv-exp-list').appendChild(makeCvExpCard({ date:'Date', title:'Role Title', org:'Organisation', bullets:['Bullet point.'] }, 0));
+}
+function addBullet(btn) {
+  const list = btn.previousElementSibling;
+  const row = document.createElement('div');
+  row.className = 'bullet-row';
+  row.style.cssText = 'display:flex;gap:0.5rem;margin-bottom:0.4rem';
+  row.innerHTML = `<input type="text" class="cv-bullet" value="New bullet point." style="flex:1"><button class="btn btn-danger btn-sm" onclick="this.closest('.bullet-row').remove()" style="flex-shrink:0">×</button>`;
+  list.appendChild(row);
+}
+function collectCvExp() {
+  return [...document.getElementById('cv-exp-list').querySelectorAll('.item-card')].map(c => ({
+    date:    c.querySelector('.cv-date').value.trim(),
+    title:   c.querySelector('.cv-title').value.trim(),
+    org:     c.querySelector('.cv-org').value.trim(),
+    bullets: [...c.querySelectorAll('.cv-bullet')].map(b => b.value.trim()).filter(Boolean)
+  }));
+}
+
+// ── CV Education ───────────────────────────────────────────────────────────────
+function renderCvEdu() {
+  const list = document.getElementById('cv-edu-list');
+  list.innerHTML = '';
+  (CONTENT.cv.education || []).forEach((e, i) => list.appendChild(makeCvEduCard(e, i)));
+}
+function makeCvEduCard(e, i) {
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML = `
+    <div class="item-card-header" onclick="toggleCard(this)">
+      <span class="item-card-title">${escHtml(e.title)}</span>
+      <span class="item-card-sub">${escHtml(e.date)}</span>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();this.closest('.item-card').remove()">Remove</button>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="item-card-body">
+      <div class="row-2">
+        <div class="field"><label>Date</label><input type="text" class="edu-date" value="${escHtml(e.date)}"></div>
+        <div class="field"><label>Institution</label><input type="text" class="edu-title" value="${escHtml(e.title)}"></div>
+      </div>
+      <div class="field"><label>Detail / Qualifications</label><textarea class="edu-detail" style="min-height:60px">${escHtml(e.detail)}</textarea></div>
+    </div>`;
+  return card;
+}
+function addCvEdu() {
+  document.getElementById('cv-edu-list').appendChild(makeCvEduCard({ date:'Date', title:'Institution', detail:'Qualifications…' }, 0));
+}
+function collectCvEdu() {
+  return [...document.getElementById('cv-edu-list').querySelectorAll('.item-card')].map(c => ({
+    date:   c.querySelector('.edu-date').value.trim(),
+    title:  c.querySelector('.edu-title').value.trim(),
+    detail: c.querySelector('.edu-detail').value.trim()
+  }));
+}
+
+// ── NODA ───────────────────────────────────────────────────────────────────────
+function renderNoda() {
+  const list = document.getElementById('noda-list');
+  list.innerHTML = '';
+  (CONTENT.noda.reviews || []).forEach((r, i) => list.appendChild(makeNodaCard(r, i)));
+}
+function makeNodaCard(r, i) {
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML = `
+    <div class="item-card-header" onclick="toggleCard(this)">
+      <span class="item-card-title">${escHtml(r.title)}</span>
+      <span class="item-card-sub">${escHtml(r.role)} · ${escHtml(r.date)}</span>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();this.closest('.item-card').remove()">Remove</button>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="item-card-body">
+      <div class="row-2">
+        <div class="field"><label>Role / Credit</label><input type="text" class="noda-role" value="${escHtml(r.role)}"></div>
+        <div class="field"><label>Date</label><input type="text" class="noda-date" value="${escHtml(r.date)}"></div>
+      </div>
+      <div class="row-2">
+        <div class="field"><label>Production Title</label><input type="text" class="noda-title" value="${escHtml(r.title)}"></div>
+        <div class="field"><label>Venue / Group</label><input type="text" class="noda-venue" value="${escHtml(r.venue)}"></div>
+      </div>
+      <div class="field"><label>Quote (HTML allowed, use &lt;strong&gt; for emphasis)</label><textarea class="noda-quote" style="min-height:80px;font-family:var(--mono);font-size:0.78rem">${escHtml(r.quote||'')}</textarea></div>
+      <div class="row-2">
+        <div class="field"><label>Report URL</label><input type="url" class="noda-link" value="${escHtml(r.link)}"></div>
+        <div class="field"><label>Named in review?</label>
+          <select class="noda-badge">
+            <option value="true"  ${r.badge?'selected':''}>Yes — show ★ badge</option>
+            <option value="false" ${!r.badge?'selected':''}>No</option>
+          </select>
+        </div>
+      </div>
+    </div>`;
+  return card;
+}
+function addNodaItem() {
+  document.getElementById('noda-list').appendChild(makeNodaCard({ role:'Role', date:'Date', badge:false, title:'Production', venue:'Venue', quote:'', link:'' }, 0));
+}
+function collectNoda() {
+  return [...document.getElementById('noda-list').querySelectorAll('.item-card')].map(c => ({
+    role:  c.querySelector('.noda-role').value.trim(),
+    date:  c.querySelector('.noda-date').value.trim(),
+    badge: c.querySelector('.noda-badge').value === 'true',
+    title: c.querySelector('.noda-title').value.trim(),
+    venue: c.querySelector('.noda-venue').value.trim(),
+    quote: c.querySelector('.noda-quote').value.trim(),
+    link:  c.querySelector('.noda-link').value.trim()
+  }));
+}
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function toggleCard(header) {
+  header.closest('.item-card').classList.toggle('open');
+}
+function escHtml(str) {
+  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function removeCard(btn, listId, renderFn, collectFn, path) {
+  btn.closest('.item-card').remove();
+}
+</script>
+</body>
+</html>
